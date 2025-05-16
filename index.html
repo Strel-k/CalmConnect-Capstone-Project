@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
+    <title>Home | CalmConnect </title>
+    
+</head>
+<body>
+    <header>
+        <div class="hdr">
+            <div><h2>CalmConnect</h2></div>
+            <div class="hdr-btns">
+                <div class="prfl-bell">
+                    <i class="bx bxs-bell" id="bell-icon"></i>
+                </div>
+                <div class="prfl-name">
+                    <h4>Username</h4>
+                </div>
+                <div class="prfl-container">
+                    <img src="img/default.jpg" alt="">
+                </div>
+                
+            </div>
+        </div>
+    </header>
+    <div class="main-bdy">
+        <div class="bdy-upper">
+            <div class="upper-txt">
+              <h2>DASS21 Test</h2>
+              <p>DASS-21 Based Anxiety & Stress Checker</p>
+            </div>
+          </div>
+          <div class="bdy-information">
+            <div class="info1">
+                <h4>Understand yourself</h4>
+                <img src="img/info1.jpg" alt="info1">
+                <p>Learn how anxiety and stress affect your daily life.</p>
+            </div>
+            <div class="info2">
+                <h4>View Results</h4>
+                <img src="img/info3.png" alt="info1">
+                <p>Learn how Anxious you are and how to manage stress.</p>
+            </div>
+            
+            <div class="info3">
+                <h4>Get Support</h4>
+                <img src="img/info2.png" alt="info1">
+                <p>Find resources tailored to your emotional health needs.</p>
+            </div>
+          </div>
+          <section class="dass21-test" style="background-color:white;">
+            <div class="test-title">
+                <h2>DASS 21 Test</h2>
+            </div>
+           
+            <div class="question-container">
+              <h3 id="question-text">Loading question...</h3>
+              <div class="scale-options">
+                <button class="scale-btn" data-value="0">😐 0</button>
+                <button class="scale-btn" data-value="1">🙂 1</button>
+                <button class="scale-btn" data-value="2">😕 2</button>
+                <button class="scale-btn" data-value="3">😟 3</button>
+              </div>
+              <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+              </div>
+              <div class="question-progress">
+                <p id="progress">1 / 21</p>
+              </div>
+            </div>
+          </section>
+    </div>
+    <footer>
+        Powered by div
+    </footer>
+    <script src="js/bell.js"></script>
+    <script src="js/question.js"></script>
+    <script src="js/progress-bar.js"></script>
+    <script src="js/summary.js"></script>
+
+</body>
+</html>
