@@ -1,0 +1,66 @@
+.admin-dashboard {
+    display: flex;
+    min-height: calc(100vh - 60px); 
+  }
+  
+  
+    .admin-options {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        background-color: #f9f9f9;
+        flex-wrap: wrap;
+    }
+
+    .title-card {
+        background-color:#32a57c;
+        padding:1rem;
+    }
+    .title-card h1{
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: center;
+        justify-content: center;
+        color:white;
+    }
+    .admin-card {
+        flex: 1 1 250px;
+        max-width: 300px;
+        border-radius: 15px;
+        background-color: white;
+        padding: 2.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        max-height:600px;
+    }
+    
+    .admin-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    .admin-card h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .admin-card img {
+        width: 80%;
+        height: 55%;
+        border-radius: 15%;
+        margin-bottom: 1rem;
+    }
+    
+    .admin-card p {
+        font-size: 0.95rem;
+        color: #555;
+    }
+    

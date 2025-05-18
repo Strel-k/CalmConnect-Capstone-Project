@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="css/summary.css">
+    <link rel="stylesheet" href="css/profile-dropdown.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+
+    <title>Home | CalmConnect </title>
+    
+</head>
+<body>
+    <header>
+        <div class="hdr">
+            <div class="hdr-logo"><a href="index.html"><h2>CalmConnect</h2></div></a>
+            <div class="hdr-btns">
+                <div class="prfl-bell dropdown">
+                    <i class="bx bxs-bell" id="bell-icon"></i>
+                    <div class="dropdown-menu" id="bell-dropdown">
+                      <p>No new notifications</p>
+                    </div>
+                  </div>
+                <div class="prfl-name">
+                    <h4>Username</h4>
+                </div>
+                <div class="prfl-container dropdown">
+                    <img src="img/default.jpg" alt="Profile Picture" id="profile-img">
+                    <div class="dropdown-menu" id="profile-dropdown">
+                      <a href="#">Settings</a>
+                      <a href="login.html">Log out</a>
+                      <a href="user-profile.html">Profile</a>
+                    </div>
+                  </div>
+                
+            </div>
+        </div>
+    </header>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+          <div class="sidebar-logo">
+          </div>
+          <nav class="sidebar-nav">
+            <a href="index.html"><i class='bx bxs-home'></i> Dashboard</a>
+            <a href="test-history.html"><i class='bx bxs-calendar-event'></i> Test History</a>
+            <a href="user-profile.html"><i class='bx bxs-user'></i> Profile</a>
+            <a href="login.html"><i class='bx bxs-log-out'></i> Log Out</a>
+          </nav>
+        </aside>
+    
+        <main class="main-bdy">
+          <div class="bdy-upper">
+            <div class="upper-txt">
+              <h2>DASS21 Test</h2>
+              <p>DASS-21 Based Anxiety & Stress Checker</p>
+            </div>
+          </div>
+          <div class="bdy-information">
+            <div class="info1">
+              <h4>Understand yourself</h4>
+              <img src="img/info1.jpg" alt="info1">
+              <p>Learn how anxiety and stress affect your daily life.</p>
+            </div>
+            <div class="info2">
+              <h4>View Results</h4>
+              <img src="img/info3.png" alt="info3">
+              <p>Learn how anxious you are and how to manage stress.</p>
+            </div>
+            <div class="info3">
+              <h4>Get Support</h4>
+              <img src="img/info2.png" alt="info2">
+              <p>Find resources tailored to your emotional health needs.</p>
+            </div>
+          </div>
+      
+          <section class="dass21-test" style="background-color:white;">
+            <div class="test-title">
+              <h2>DASS 21 Test</h2>
+            </div>
+            <div class="question-container">
+              <h3 id="question-text">Loading question...</h3>
+              <div class="scale-options">
+                <button class="scale-btn" data-value="0">😐 0</button>
+                <button class="scale-btn" data-value="1">🙂 1</button>
+                <button class="scale-btn" data-value="2">😕 2</button>
+                <button class="scale-btn" data-value="3">😟 3</button>
+              </div>
+              <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+              </div>
+              <div class="question-progress">
+                <p id="progress">1 / 21</p>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    <script src="js/bell.js"></script>
+    <script src="js/question.js"></script>
+    <script src="js/progress-bar.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/dropdown.js"></script>
+
+
+</body>
+</html>

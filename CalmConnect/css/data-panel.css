@@ -1,0 +1,70 @@
+.data-collection {
+    display: flex;
+    min-height:100vh;
+  }
+  
+  .data-main {
+    flex: 1;
+    padding: 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .data-chart {
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  
+  .data-chart h2 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+  
+  .data-list {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .data-list h2 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .data-table th, .data-table td {
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    text-align: center;
+  }
+  
+  .data-table th {
+    background-color: #2ecc71;
+    color: white;
+  }
+  .chart-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  #dassChart {
+    max-width: 600px;     /* You can reduce this if needed */
+    max-height: 400px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;        /* Center the chart */
+    display: block;
+  }
+  #chartType {
+    padding: 5px 10px;
+    font-size: 1rem;
+  }
