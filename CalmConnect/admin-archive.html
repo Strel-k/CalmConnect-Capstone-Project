@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="css/summary.css">
+    <link rel="stylesheet" href="css/profile-dropdown.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="stylesheet" href="css/admin-panel.css">
+    <link rel="stylesheet" href="css/data-panel.css">
+    <link rel="stylesheet" href="css/admin-archive.css">
+    <title>Archives | CalmConnect</title>
+</head>
+<body>
+    <header>
+        <div class="hdr">
+            <div class="hdr-logo"><a href="#"><h2>CalmConnect</h2></div></a>
+            <div class="hdr-btns">
+                <div class="prfl-bell dropdown">
+                    <i class="bx bxs-bell" id="bell-icon"></i>
+                    <div class="dropdown-menu" id="bell-dropdown">
+                      <p>No new notifications</p>
+                    </div>
+                  </div>
+                <div class="prfl-name">
+                    <h4>Username</h4>
+                </div>
+                <div class="prfl-container dropdown">
+                    <img src="img/default.jpg" alt="Profile Picture" id="profile-img">
+                    <div class="dropdown-menu" id="profile-dropdown">
+                      <a href="#">Settings</a>
+                      <a href="login.html">Log out</a>
+                      <a href="user-profile.html">Profile</a>
+                    </div>
+                  </div>
+                
+            </div>
+        </div>
+    </header>
+    <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h3>Admin Panel</h3>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="admin-panel.html"><i class="bx bxs-home"></i> Dashboard</a>
+        <a href="admin-data.html"><i class="bx bxs-data"></i> Data</a>
+        <a href="admin-users.html"><i class="bx bxs-user"></i> Users</a>
+        <a href="admin-archive.html"><i class="bx bxs-archive"></i> Archives</a>
+        <a href="login.html"><i class="bx bxs-log-out"></i> Log Out</a>
+      </nav>
+    </aside>
+
+    <main class="archive-main">
+      <div class="archive-container">
+        <div class="archive-header">
+          <h2>Archives</h2>
+        </div>
+        <div class="archive-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>student01</td>
+                <td>John</td>
+                <td>Doe</td>
+                <td>oXZ6o@example.com</td>
+                <td>Student</td>
+                <td><button>View</button></td>
+              </tr>
+              <tr>
+                <td>student02</td>
+                <td>Jane</td>
+                <td>Smith</td>
+                <td>jsmith@example.com</td>
+                <td>Student</td>
+                <td><button>View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

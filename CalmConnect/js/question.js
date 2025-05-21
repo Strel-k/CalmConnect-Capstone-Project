@@ -33,8 +33,7 @@ function renderQuizLayout() {
 const questions = [
     "I found it hard to wind down.",
     "I was aware of dryness of my mouth.",
-    "I couldn't seem to experience any positive feeling at all.",
-    "Are you gay?"
+    "I couldn't seem to experience any positive feeling at all."
   ];
   
   let currentIndex = 0;

@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f4;
+}
+
+.archive-main {
+  flex: 1;
+  padding: 2rem;
+  background: #f9f9f9;
+}
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.archive-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.archive-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #2ecc71;
+  text-transform: uppercase;
+}
+
+.archive-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.archive-table th,
+.archive-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.archive-table th {
+  background-color: #f2f2f2;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #333;
+}
+
+.archive-table td {
+  color: #444;
+}
+
+.archive-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.archive-table button {
+  padding: 0.5rem 1rem;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.archive-table button:hover {
+  background-color: #27ae60;
+}

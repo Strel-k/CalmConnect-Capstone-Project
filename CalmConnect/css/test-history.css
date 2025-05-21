@@ -8,7 +8,12 @@
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
-  
+  .test-history-title h2{
+    color: #2ecc71;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
   .history-table {
     width: 120%;
     border-collapse: collapse;

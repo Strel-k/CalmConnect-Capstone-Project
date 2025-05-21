@@ -8,7 +8,10 @@
     padding: 2rem;
     background-color: #f9f9f9;
   }
-  
+  .data-title h2 {
+    color: #2ecc71;
+    text-transform: uppercase;
+  }
   .data-chart {
     padding: 1rem;
     background: white;

@@ -1,27 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .user-list {
-    display: flex;
-    padding: 2rem;
-    gap: 2rem;
-  }
-  
-  .user-list-container {
+  flex: 1;
+  padding: 2rem;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.user-list-container {
     flex: 1;
-  }
   
-  .user-list-header h2 {
+}
+
+.user-list-header h2 {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
     text-transform: uppercase;
     color: #2ecc71;
-  }
-  
-  .user-list-body {
+}
+
+.user-list-body {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .user-list-item {
+    gap: 1.5rem;
+}
+
+.user-list-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,45 +40,68 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease;
-  }
-  
-  .user-list-item:hover {
+    gap: 1rem;
+}
+
+.user-list-item:hover {
     transform: translateY(-3px);
-  }
-  
-  .user-list-item-left {
+}
+
+.user-list-item-left {
     display: flex;
     align-items: center;
     gap: 1rem;
-  }
-  
-  .user-list-item-left img {
+}
+
+.user-list-item-left img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
-  }
-  
-  .user-list-item-left h4 {
+}
+
+.user-list-item-left h4 {
     font-size: 1.1rem;
     margin: 0;
     color: #333;
-  }
-  
-  .user-list-item-right a {
+}
+
+.user-list-item-right {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.user-list-item-right a,
+.user-list-item-right button {
     padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.user-list-item-right a {
     background-color: #2ecc71;
     color: white;
     text-decoration: none;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: background 0.3s ease;
-  }
-  
-  .user-list-item-right a:hover {
+}
+
+.user-list-item-right a:hover {
     background-color: #27ae60;
-  }
-  .user-search {
+}
+
+.user-list-item-right button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+}
+
+.user-list-item-right button:hover {
+    background-color: #c0392b;
+}
+
+.user-search {
     padding: 0.6rem 1rem;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -76,5 +109,4 @@
     max-width: 300px;
     margin-bottom: 1rem;
     font-size: 1rem;
-  }
-  
+}
