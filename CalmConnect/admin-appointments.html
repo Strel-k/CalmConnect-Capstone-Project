@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appointments | CalmConnect</title>
+
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/admin-calendar.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/profile-dropdown.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin-calendar.css" />
+  <link rel="icon" type="image/x-icon" href="img/favicon.png" />
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin-calendar-modal.css">
+</head>
+
+<body>
+  <header>
+    <div class="hdr">
+      <div class="hdr-logo">
+        <a href="#"><h2>CalmConnect</h2></a>
+      </div>
+      <div class="hdr-btns">
+        <div class="prfl-bell dropdown">
+          <i class="bx bxs-bell" id="bell-icon"></i>
+          <div class="dropdown-menu" id="bell-dropdown">
+            <p>No new notifications</p>
+          </div>
+        </div>
+        <div class="prfl-name">
+          <h4>Username</h4>
+        </div>
+        <div class="prfl-container dropdown">
+          <img src="img/default.jpg" alt="Profile Picture" id="profile-img" />
+          <div class="dropdown-menu" id="profile-dropdown">
+            <a href="#">Settings</a>
+            <a href="login.html">Log out</a>
+            <a href="user-profile.html">Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h3>Admin Panel</h3>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="admin-panel.html"><i class="bx bxs-home"></i> Dashboard</a>
+        <a href="admin-data.html"><i class="bx bxs-data"></i> Data</a>
+        <a href="admin-appointments.html"><i class='bx bxs-calendar-week'></i> Appointments</a>
+        <a href="admin-archive.html"><i class="bx bxs-archive"></i> Archives</a>
+      </nav>
+    </aside>
+
+    <main class="appointment-main">
+      <div class="appointment-header">
+        <h2>Scheduled Appointments</h2>
+      </div>
+      <div id="admin-calendar"></div>
+    </main>
+  </div>
+  <div id="appointmentModal" class="modal">
+  <div class="modal-content">
+<span class="close-btn" onclick="closeModal()">&times;</span>
+    <h3>Edit Appointment</h3>
+    <form id="editAppointmentForm">
+      <label for="studentId">Student ID</label>
+      <input type="text" id="studentId" name="studentId" required>
+
+      <label for="studentName">Name</label>
+      <input type="text" id="studentName" name="studentName" required>
+
+      <label for="college">College</label>
+      <input type="text" id="college" name="college" required>
+
+      <label for="program">Program</label>
+      <input type="text" id="program" name="program" required>
+
+      <label for="counselor">Guidance Counselor</label>
+      <input type="text" id="counselor" name="counselor" required>
+
+      <label for="reason">Reason for Visit</label>
+      <textarea id="reason" name="reason" rows="3" required></textarea>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Time</label>
+      <input type="time" id="time" name="time" required>
+
+      <div class="modal-actions">
+        <button type="submit">Save Changes</button>
+        <button type="button" class="archive-btn" onclick="archiveAppointment()">Archive</button>
+<button type="button" onclick="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script src="js/bell.js"></script>
+  <script src="js/dropdown.js"></script>
+  <script src="js/appointment-scheduling.js"></script>
+</body>
+</html>

@@ -50,9 +50,8 @@
             <nav class="sidebar-nav">
               <a href="admin-panel.html"><i class='bx bxs-home'></i> Dashboard</a>
               <a href="admin-data.html"><i class='bx bxs-data'></i> Data</a>
-              <a href="admin-users.html"><i class='bx bxs-user'></i> Users</a>
+        <a href="admin-appointments.html"><i class='bx  bxs-calendar-week'  ></i>  Appointments</a>
               <a href="admin-archive.html"><i class='bx  bxs-archive'  ></i>   Archives</a>
-              <a href="login.html"><i class='bx bxs-log-out'></i> Log Out</a>
             </nav>
           </aside>
           <div class="data-main">
@@ -60,18 +59,28 @@
               <h2>Data Collection</h2>
             </div>
             <div class="data-chart">
-              <h2>Overall Results Overview</h2>
-              <div class="chart-controls">
-                <label for="chartType">View As:</label>
-                <select id="chartType">
-                  <option value="bar">Bar</option>
-                  <option value="pie">Pie</option>
-                  <option value="line">Line</option>
-                </select>
-              </div>
-              <canvas id="dassChart" width="100%" height="40"></canvas>
-            </div>
-          
+  <h2>Overall Results Overview</h2>
+
+    <div class="chart-controls">
+      
+    <label for="collegeSelector">Filter by College:</label>
+    <select id="collegeSelector">
+      <option value="">-- Select College --</option>
+      <option value="CASS">College of Arts and Social Sciences</option>
+      <option value="CEN">College of Engineering</option>
+      <option value="CBA">College of Business Administration</option>
+      <option value="COF">College of Fisheries</option>
+      <option value="CAG">College of Agriculture</option>
+      <option value="CHSI">College of Home Science and Industry</option>
+      <option value="CED">College of Education</option>
+      <option value="COS">College of Sciences</option>
+      <option value="CVSM">College of Veterinary Science and Medicine</option>
+    </select>
+  </div>
+
+  <canvas id="collegeChart" width="100%" height="40"></canvas>
+          <h2>Combined College Overview</h2>
+<canvas id="combinedCollegeChart" width="600" height="400"></canvas>
             <div class="data-list">
               <h2>Collected Responses</h2>
               <table class="data-table">

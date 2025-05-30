@@ -75,3 +75,146 @@ body {
 .archive-table button:hover {
   background-color: #27ae60;
 }
+.archive-controls {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.archive-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.archive-section th, .archive-section td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.archive-section th {
+  background-color: #f2f2f2;
+}
+.archive-controls {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.archive-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.archive-section th, .archive-section td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Box */
+.modal-content {
+  background-color: #fff;
+  margin: 8% auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Modal Title */
+.modal-content h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.4rem;
+}
+
+/* Modal Body Text */
+#modal-body p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Close Button */
+.close-btn {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+.archive-nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.archive-btn {
+  background-color: #2ecc71;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.archive-btn:hover {
+  background-color: #27ae60;
+  transform: translateY(-3px);
+}
+
+.archive-section {
+  display: none;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/profile-dropdown.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="stylesheet" href="css/intro-form.css">
 
     <title>Home | CalmConnect </title>
     
@@ -42,16 +43,7 @@
         </div>
     </header>
     <div class="dashboard-layout">
-        <aside class="sidebar">
-          <div class="sidebar-logo">
-          </div>
-          <nav class="sidebar-nav">
-            <a href="index.html"><i class='bx bxs-home'></i> Dashboard</a>
-            <a href="test-history.html"><i class='bx bxs-calendar-event'></i> Test History</a>
-            <a href="user-profile.html"><i class='bx bxs-user'></i> Profile</a>
-            <a href="login.html"><i class='bx bxs-log-out'></i> Log Out</a>
-          </nav>
-        </aside>
+        
     
         <main class="main-bdy">
           <div class="bdy-upper">
@@ -83,6 +75,7 @@
               <h2>DASS 21 Test</h2>
             </div>
             <div class="question-container">
+
               <h3 id="question-text">Loading question...</h3>
               <div class="scale-options">
                 <button class="scale-btn" data-value="0">😐 0</button>
@@ -92,6 +85,8 @@
               </div>
               <div class="progress-container">
                 <div class="progress-bar" id="progress-bar"></div>
+                            <div class="mini-progress" id="mini-progress"></div>
+
               </div>
               <div class="question-progress">
                 <p id="progress">1 / 21</p>
@@ -100,12 +95,63 @@
           </section>
         </main>
       </div>
+      <div class="intro-form-overlay" id="introForm">
+  <form class="intro-form" id="userInfoForm">
+    <h2>Before You Start</h2>
+    
+    <label>Name (optional)</label>
+    <input type="text" name="name">
+     <label>Student ID</label>
+    <input type="text" name="name" required>
+   <label for="college">College</label>
+<select id="college" name="college" required>
+  <option value="">--Select--</option>
+  <option value="CASS">College of Arts and Social Sciences</option>
+  <option value="CEN">College of Engineering</option>
+  <option value="CBA">College of Business Administration</option>
+  <option value="COF">College of Fisheries</option>
+  <option value="CAG">College of Agriculture</option> 
+  <option value="CHSI">College of Home Science and Industry</option>
+  <option value="CED">College of Education</option>
+  <option value="COS">College of Sciences</option>
+  <option value="CVSM">College of Veterinary Science and Medicine</option>
+</select>
+
+<label for="program">Program</label>
+<select id="program" name="program" required>
+  <option value="">--Select a College First--</option>
+</select>
+
+    <label>Year Level</label>
+    <select name="year" required>
+      <option value="">--Select--</option>
+      <option value="1">1st Year</option>
+      <option value="2">2nd Year</option>
+      <option value="3">3rd Year</option>
+      <option value="4">4th Year</option>
+    </select>
+
+    <label>Age</label>
+    <input type="number" name="age" min="15" required>
+
+    <label>Gender</label>
+    <select name="gender" required>
+      <option value="">--Select--</option>
+      <option value="Female">Female</option>
+      <option value="Male">Male</option>
+      <option value="Non-binary">Non-binary</option>
+      <option value="Prefer not to say">Prefer not to say</option>
+    </select>
+
+    <button type="submit">Continue</button>
+  </form>
+</div>
     <script src="js/bell.js"></script>
     <script src="js/question.js"></script>
     <script src="js/progress-bar.js"></script>
     <script src="js/summary.js"></script>
     <script src="js/dropdown.js"></script>
-
-
+    <script src="js/intro-form.js"></script>
+  <script src="js/college-programs.js"></script>
 </body>
 </html>

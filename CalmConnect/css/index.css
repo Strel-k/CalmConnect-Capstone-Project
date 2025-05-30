@@ -205,10 +205,27 @@ body {
     text-align: center;
     text-transform: uppercase;
   }
-  @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes pulse {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(1.02); }
+  100% { transform: scaleX(1); }
+}
+
+.progress-bar.pulse {
+  animation: pulse 0.3s ease;
+}
+
+.mini-progress .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.mini-progress .dot.active {
+  background-color: #2ecc71;
+}
 footer {
     background-color: black;
     color: white;
@@ -217,4 +234,40 @@ footer {
     bottom:10;
     width:100%;
     font:10px;
+}
+
+.encouragement-msg {
+  background: #e9f9f1;
+  padding: 0.8rem;
+  border-left: 4px solid #2ecc71;
+  border-radius: 6px;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+.pulse {
+  animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(1.05); }
+  100% { transform: scaleX(1); }
+}
+
+.mini-progress {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 5px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.dot.active {
+  background-color: #2ecc71;
 }

@@ -71,3 +71,26 @@
     padding: 5px 10px;
     font-size: 1rem;
   }
+
+  .college-filter-chart {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.college-filter-chart label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+#collegeSelector {
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}

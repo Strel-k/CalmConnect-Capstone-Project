@@ -1,0 +1,159 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="css/summary.css">
+    <link rel="stylesheet" href="css/profile-dropdown.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/scheduler.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
+  <link rel="stylesheet" href="css/booking-modal.css ">
+    <title>Scheduler | CalmConnect</title>
+</head>
+<body>
+    <header>
+        <div class="hdr">
+            <div class="hdr-logo"><a href="index.html"><h2>CalmConnect</h2></div></a>
+            <div class="hdr-btns">
+                <div class="prfl-bell dropdown">
+                    <i class="bx bxs-bell" id="bell-icon"></i>
+                    <div class="dropdown-menu" id="bell-dropdown">
+                      <p>No new notifications</p>
+                    </div>
+                  </div>
+                <div class="prfl-name">
+                    <h4>Username</h4>
+                </div>
+                <div class="prfl-container dropdown">
+                    <img src="img/default.jpg" alt="Profile Picture" id="profile-img">
+                    <div class="dropdown-menu" id="profile-dropdown">
+                      <a href="#">Settings</a>
+                      <a href="login.html">Log out</a>
+                      <a href="user-profile.html">Profile</a>
+                    </div>
+                  </div>
+                
+            </div>
+        </div>
+    </header>
+    <div class="dashboard-layout">
+        
+     <div class="scheduler-container">
+  <h3>Select a Counselor</h3>
+
+  <div class="counselor-selection">
+    <div class="counselor-card" data-counselor="counselor1">
+      <img src="img/default.jpg" alt="Ms. Rivera" />
+      <div class="counselor-details">
+        <p class="name">Ms. Rivera</p>
+        <p class="unit">Career Guidance Unit</p>
+        <p class="rank">Associate Professor III</p>
+      </div>
+    </div>
+
+    <div class="counselor-card" data-counselor="counselor2">
+      <img src="img/default.jpg" alt="Mr. Santos" />
+      <div class="counselor-details">
+        <p class="name">Mr. Santos</p>
+        <p class="unit">Student Wellness Center</p>
+        <p class="rank">Assistant Professor I</p>
+      </div>
+    </div>
+
+    <div class="counselor-card" data-counselor="counselor3">
+      <img src="img/default.jpg" alt="Dr. Dela Cruz" />
+      <div class="counselor-details">
+        <p class="name">Dr. Dela Cruz</p>
+        <p class="unit">Psychological Services Unit</p>
+        <p class="rank">Professor IV</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="available-slots">
+    <h4>Available Slots</h4>
+    <ul class="slot-list"></ul>
+  </div>
+</div>
+<div id="booking-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="close-modal">&times;</span>
+    <h3>Book Counseling Session</h3>
+    <form id="booking-form">
+      <label>Name </label>
+      <input type="text" name="name" required>
+
+      <label for="college">College</label>
+<select id="college" name="college" required>
+  <option value="">--Select--</option>
+  <option value="CASS">College of Arts and Social Sciences</option>
+  <option value="CEN">College of Engineering</option>
+  <option value="CBA">College of Business Administration</option>
+  <option value="COF">College of Fisheries</option>
+  <option value="CAG">College of Agriculture</option>
+  <option value="CHSI">College of Home Science and Industry</option>
+  <option value="CED">College of Education</option>
+  <option value="COS">College of Sciences</option>
+  <option value="CVSM">College of Veterinary Science and Medicine</option>
+</select>
+    <label for="student-id">Student ID</label>
+    <input type="text" name="student-id" required>
+<label for="program">Program</label>
+<select id="program" name="program" required>
+  <option value="">--Select a College First--</option>
+</select>
+
+      <label>Age</label>
+      <input type="number" name="age" min="12" required>
+
+      <label>Date of Birth</label>
+      <input type="date" name="dob" required>
+
+      <label>DASS21 Result</label>
+      <input type="text" name="dass" id="dass-result" readonly>
+
+      <label>Appointment Slot</label>
+      <input type="text" name="slot" id="slot-display" readonly>
+      <label for="reason">Reason for Visit</label>
+<textarea name="reason" id="reason" rows="4" placeholder="Briefly describe your concern..." required></textarea>
+      <button type="submit">Confirm Appointment</button>
+    </form>
+  </div>
+</div>
+<div id="confirmationModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeConfirmationModal()">&times;</span>
+    <h3>✅ Appointment Confirmed!</h3>
+    <p>Your session with the guidance counselor has been successfully booked.</p>
+    <p>You'll receive further details via email or dashboard notification.</p>
+    <button onclick="closeConfirmationModal()">Close</button>
+  </div>
+</div>
+    <script>
+    document.getElementById("scheduleForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      document.getElementById("scheduleForm").style.display = "none";
+      document.getElementById("confirmation").style.display = "block";
+    });
+  </script>
+  <script src="js/scheduler.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script src="js/scheduler.js"></script>
+    <script src="js/bell.js"></script>
+    <script src="js/question.js"></script>
+    <script src="js/progress-bar.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/dropdown.js"></script>
+    <script src="js/college-programs.js"></script>
+  <script src="js/confirm-modal.js"></script>
+</body>
+</html>
