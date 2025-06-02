@@ -44,6 +44,8 @@
         <a href="admin-data.html"><i class="bx bxs-data"></i> Data</a>
         <a href="admin-appointments.html"><i class='bx bxs-calendar-week'></i> Appointments</a>
         <a href="admin-archive.html" class="active"><i class="bx bxs-archive"></i> Archives</a>
+        <a href="admin-personnel.html"><i class="bx bxs-user-badge"></i> Personnel</a>
+
       </nav>
     </aside>
 
@@ -87,16 +89,15 @@
               <td>10:00 AM</td>
               <td>Ms. Rivera</td>
               <td>Follow-up</td>
-              <td><button onclick='showArchiveModal("appointments", {
-                student: "Student01",
-                studentId: "2023-00001",
-                college: "CASS",
-                program: "BA Communication",
-                date: "2025-06-01",
-                time: "10:00 AM",
-                counselor: "Ms. Rivera",
-                reason: "Follow-up"
-              })'>View</button></td>
+              <td>
+  <button  onclick='showArchiveModal("appointments", {
+    student: "Student01",
+    date: "2025-06-01",
+    time: "10:00 AM",
+    counselor: "Ms. Rivera",
+    reason: "Follow-up"
+  })'> <i class='bx bx-show'></i> View</button>
+</td>
             </tr>
           </tbody>
         </table>
@@ -144,7 +145,6 @@
         <table>
           <thead>
             <tr>
-              <th>Username</th>
               <th>Name</th>
               <th>Email</th>
               <th>Unit</th>
@@ -154,18 +154,19 @@
           </thead>
           <tbody>
             <tr>
-              <td>counselor01</td>
               <td>Theresa Cruz</td>
               <td>tcruz@example.com</td>
               <td>Student Wellness Center</td>
               <td>Assistant Professor</td>
-              <td><button onclick='showArchiveModal("employees", {
-                username: "counselor01",
-                name: "Theresa Cruz",
-                email: "tcruz@example.com",
-                unit: "Student Wellness Center",
-                rank: "Assistant Professor"
-              })'>View</button></td>
+              <td>
+<button onclick='showArchiveModal("employee", {
+  name: "Theresa Cruz",
+  email: "tcruz@example.com",
+  role: "Counselor",
+  unit: "Student Wellness Center",
+  rank: "Assistant Professor I"
+})'><i class="bx bx-show"></i> View</button>
+</td>
             </tr>
           </tbody>
         </table>
@@ -179,11 +180,15 @@
       <span class="close-btn" onclick="closeArchiveModal()">&times;</span>
       <h3 id="modal-title">Archive Details</h3>
       <div id="modal-body"></div>
+      <button id="downloadPdfBtn" class="download-btn">Download Report as PDF</button>
+
     </div>
   </div>
 
   <script src="js/archive-options.js"></script>
   <script src="js/archive-modal.js"></script>
   <script src="js/archive-navigation.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
 </body>
 </html>

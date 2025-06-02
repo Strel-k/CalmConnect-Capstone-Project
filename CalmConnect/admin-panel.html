@@ -1,84 +1,90 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="css/summary.css">
-    <link rel="stylesheet" href="css/profile-dropdown.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="icon" type="image/x-icon" href="img/favicon.png">
-    <link rel="stylesheet" href="css/admin-panel.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel | CalmConnect</title>
 
-    <title>Admin Panel | CalmConnect</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/profile-dropdown.css" />
+  <link rel="stylesheet" href="css/admin-panel.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <link rel="icon" type="image/x-icon" href="img/favicon.png" />
 </head>
 <body>
-    <header>
-        <div class="hdr">
-            <div class="hdr-logo"><a href="#"><h2>CalmConnect</h2></div></a>
-            <div class="hdr-btns">
-                <div class="prfl-bell dropdown">
-                    <i class="bx bxs-bell" id="bell-icon"></i>
-                    <div class="dropdown-menu" id="bell-dropdown">
-                      <p>No new notifications</p>
-                    </div>
-                  </div>
-                <div class="prfl-name">
-                    <h4>Username</h4>
-                </div>
-                <div class="prfl-container dropdown">
-                    <img src="img/default.jpg" alt="Profile Picture" id="profile-img">
-                    <div class="dropdown-menu" id="profile-dropdown">
-                      <a href="#">Settings</a>
-                      <a href="login.html">Log out</a>
-                      <a href="user-profile.html">Profile</a>
-                    </div>
-                  </div>
-                
-            </div>
+  <header>
+    <div class="hdr">
+      <div class="hdr-logo"><a href="#"><h2>CalmConnect</h2></a></div>
+      <div class="hdr-btns">
+        <div class="prfl-bell dropdown">
+          <i class="bx bxs-bell" id="bell-icon"></i>
+          <div class="dropdown-menu" id="bell-dropdown"><p>No new notifications</p></div>
         </div>
-    </header>
-    <div class="admin-dashboard">
-        <aside class="sidebar">
-            <div class="sidebar-logo">
-                <h3>Admin Panel</h3>
-            </div>
-            <nav class="sidebar-nav">
-              <a href="admin-panel.html"><i class='bx bxs-home'></i> Dashboard</a>
-              <a href="admin-data.html"><i class='bx bxs-data'></i> Data</a>
-        <a href="admin-appointments.html"><i class='bx  bxs-calendar-week'  ></i>  Appointments</a>
-              <a href="admin-archive.html"><i class='bx  bxs-archive'  ></i>   Archives</a>
-            </nav>
-          </aside>
-          
-          <main class="admin-options">
-         
-            <div class="admin-card" onclick="window.location.href='admin-data.html'">
-              <h4>Data</h4>
-              <img src="img/data-icon.png" alt="Data">
-              <p>View and manage collected DASS-21 responses.</p>
-            </div>
-            <div class="admin-card" onclick="window.location.href='admin-users.html'">
-              <h4>Users</h4>
-              <img src="img/users-icon.png" alt="Users">
-              <p>Monitor user activity and access levels.</p>
-            </div>
-            <div class="admin-card" onclick="window.location.href='admin-archive.html'">
-              <h4>Archive</h4>
-              <img src="img/archive-icon.png" alt="Archive">
-              <p>Browse archived data and historical records.</p>
-            </div>
+        <div class="prfl-name"><h4>Username</h4></div>
+        <div class="prfl-container dropdown">
+          <img src="img/default.jpg" alt="Profile" id="profile-img" />
+          <div class="dropdown-menu" id="profile-dropdown">
+            <a href="#">Settings</a>
+            <a href="login.html">Log out</a>
+            <a href="user-profile.html">Profile</a>
+          </div>
+        </div>
+      </div>
     </div>
-   
+  </header>
+
+  <div class="admin-dashboard">
+    <aside class="sidebar">
+      <div class="sidebar-logo"><h3>Admin Panel</h3></div>
+      <nav class="sidebar-nav">
+        <a href="admin-panel.html" class="active"><i class="bx bxs-home"></i> Dashboard</a>
+        <a href="admin-data.html"><i class='bx bxs-data'></i> Data</a>
+        <a href="admin-appointments.html"><i class='bx bxs-calendar-week'></i> Appointments</a>
+        <a href="admin-archive.html"><i class='bx bxs-archive'></i> Archives</a>
+        <a href="admin-personnel.html"><i class="bx bxs-user-badge"></i> Personnel</a>
+
+      </nav>
+    </aside>
+
+    <main class="admin-options">
+       <div class="dashboard-widgets dashboard-calendar">
+        <h3>Welcome, Admin</h3>
+      </div>
       
- 
-        <script src="js/bell.js"></script>
-        <script src="js/question.js"></script>
-        <script src="js/progress-bar.js"></script>
-        <script src="js/summary.js"></script>
-        <script src="js/dropdown.js"></script>
+      <div class="chart-box">
+        <h3>DASS21 Overview</h3>
+        <canvas id="overviewChart"></canvas>
+      </div>
+      <div class="summary-cards">
+        <div class="summary-card green">
+          <h3>Total Appointments</h3>
+          <p>124</p>
+        </div>
+        <div class="summary-card yellow">
+          <h3>High-Risk Cases</h3>
+          <p>38</p>
+        </div>
+        <div class="summary-card blue">
+          <h3>Active Counselors</h3>
+          <p>6</p>
+        </div>
+      </div>
+
+
+     
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
+
+  <script src="js/bell.js"></script>
+  <script src="js/dropdown.js"></script>
+  <script src="js/admin-panel-chart.js"></script>
+  <script src="js/admin-panel-calendar.js"></script>
 </body>
 </html>
