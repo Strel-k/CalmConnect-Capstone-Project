@@ -1,157 +1,1111 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="css/summary.css">
-    <link rel="stylesheet" href="css/profile-dropdown.css">
-    <link rel="stylesheet" href="css/sidebar.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.png">
-    <link rel="stylesheet" href="css/intro-form.css">
-
-    <title>Home | CalmConnect </title>
+    <title>Home | CalmConnect</title>
     
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header Styles - Matching Admin Panel */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .hdr {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hdr-logo h2 {
+            color: #2ecc71;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .hdr-logo a {
+            text-decoration: none;
+        }
+
+        .hdr-btns {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .prfl-bell {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .prfl-bell i {
+            font-size: 1.3rem;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .prfl-bell:hover i {
+            color: #2ecc71;
+        }
+
+        .prfl-name h4 {
+            color: #333;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .prfl-container img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #2ecc71;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1rem;
+            min-width: 150px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1001;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .dropdown-menu a:hover {
+            color: #2ecc71;
+        }
+
+        /* Main Content */
+        .main-bdy {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .bdy-upper {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(46, 204, 113, 0.3);
+        }
+
+        .upper-txt h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .upper-txt p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Information Cards */
+        .bdy-information {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .bdy-information > div {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bdy-information > div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+        }
+
+        .bdy-information > div:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .bdy-information h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2c3e50;
+        }
+
+        .bdy-information img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+        }
+
+        .bdy-information p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Test Section */
+        .dass21-test {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-title h2 {
+            text-align: center;
+            text-transform: uppercase;
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .question-container {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            max-width: 700px;
+            margin: 0 auto;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        #question-text {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .scale-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .scale-btn {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            min-width: 80px;
+        }
+
+        .scale-btn:hover {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .scale-btn:active {
+            transform: translateY(0);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            margin: 2rem 0 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            transition: width 0.3s ease-in-out;
+            border-radius: 6px;
+        }
+
+        .progress-bar.pulse {
+            animation: pulse 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scaleX(1); }
+            50% { transform: scaleX(1.02); }
+            100% { transform: scaleX(1); }
+        }
+
+        .mini-progress {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: #2ecc71;
+        }
+
+        .question-progress {
+            margin-top: 1rem;
+        }
+
+        .question-progress p {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Results Section */
+   .results-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 2rem auto;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-header h2 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .encouragement-msg {
+            background: rgba(233, 249, 241, 0.9);
+            border-left: 4px solid #2ecc71;
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-card {
+            background: rgba(233, 249, 241, 0.9);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .score-card h3 {
+            color: #27ae60;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-interpretation {
+            font-size: 0.85rem;
+            color: #2c3e50;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.3rem 0.5rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .score-meter {
+            height: 6px;
+            background: #ecf0f1;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .score-meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .resources-section {
+            margin-top: 1.5rem;
+        }
+
+        .resources-section h3 {
+            color: #2c3e50;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .resources-list {
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .resources-list li {
+            background: rgba(233, 249, 241, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .resources-list a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .resources-list a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .retake-btn, .save-btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .retake-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .retake-btn:hover, .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .scores-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .resources-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .retake-btn, .save-btn {
+                width: 100%;
+            }
+        }
+
+        /* Intro Form Overlay */
+        .intro-form-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .intro-form {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .intro-form h2 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .intro-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .intro-form input,
+        .intro-form select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .intro-form input:focus,
+        .intro-form select:focus {
+            outline: none;
+            border-color: #2ecc71;
+        }
+
+        .intro-form button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .intro-form button:hover {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        /* Encouragement Message */
+        .encouragement-msg {
+            background: rgba(233, 249, 241, 0.9);
+            backdrop-filter: blur(5px);
+            padding: 1rem;
+            border-left: 4px solid #2ecc71;
+            border-radius: 8px;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        /* Hidden by default */
+        .intro-form-overlay,
+        .results-container {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hdr {
+                padding: 0 1rem;
+            }
+
+            .main-bdy {
+                padding: 1rem;
+            }
+
+            .upper-txt h2 {
+                font-size: 2rem;
+            }
+
+            .bdy-information {
+                grid-template-columns: 1fr;
+            }
+
+            .scale-options {
+                gap: 0.5rem;
+            }
+
+            .scale-btn {
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+                min-width: 60px;
+            }
+
+            .question-container {
+                padding: 2rem 1rem;
+            }
+
+            #question-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="hdr">
-            <div class="hdr-logo"><a href="index.html"><h2>CalmConnect</h2></div></a>
+            <div class="hdr-logo"><a href="index.html"><h2>CalmConnect</h2></a></div>
             <div class="hdr-btns">
                 <div class="prfl-bell dropdown">
                     <i class="bx bxs-bell" id="bell-icon"></i>
                     <div class="dropdown-menu" id="bell-dropdown">
-                      <p>No new notifications</p>
+                        <p>No new notifications</p>
                     </div>
-                  </div>
+                </div>
                 <div class="prfl-name">
                     <h4>Username</h4>
                 </div>
                 <div class="prfl-container dropdown">
                     <img src="img/default.jpg" alt="Profile Picture" id="profile-img">
                     <div class="dropdown-menu" id="profile-dropdown">
-                      <a href="#">Settings</a>
-                      <a href="login.html">Log out</a>
-                      <a href="user-profile.html">Profile</a>
+                        <a href="#">Settings</a>
+                        <a href="login.html">Log out</a>
+                        <a href="user-profile.html">Profile</a>
                     </div>
-                  </div>
-                
+                </div>
             </div>
         </div>
     </header>
-    <div class="dashboard-layout">
-        
-    
-        <main class="main-bdy">
-          <div class="bdy-upper">
+
+    <main class="main-bdy">
+        <div class="bdy-upper">
             <div class="upper-txt">
-              <h2>DASS21 Test</h2>
-              <p>DASS-21 Based Anxiety & Stress Checker</p>
+                <h2>DASS21 Test</h2>
+                <p>DASS-21 Based Anxiety & Stress Checker</p>
             </div>
-          </div>
-          <div class="bdy-information">
+        </div>
+
+        <div class="bdy-information">
             <div class="info1">
-              <h4>Understand yourself</h4>
-              <img src="img/info1.jpg" alt="info1">
-              <p>Learn how anxiety and stress affect your daily life.</p>
+                <h4>Understand yourself</h4>
+                <img src="img/info1.jpg" alt="info1">
+                <p>Learn how anxiety and stress affect your daily life.</p>
             </div>
             <div class="info2">
-              <h4>View Results</h4>
-              <img src="img/info3.png" alt="info3">
-              <p>Learn how anxious you are and how to manage stress.</p>
+                <h4>View Results</h4>
+                <img src="img/info3.png" alt="info3">
+                <p>Learn how anxious you are and how to manage stress.</p>
             </div>
             <div class="info3">
-              <h4>Get Support</h4>
-              <img src="img/info2.png" alt="info2">
-              <p>Find resources tailored to your emotional health needs.</p>
+                <h4>Get Support</h4>
+                <img src="img/info2.png" alt="info2">
+                <p>Find resources tailored to your emotional health needs.</p>
             </div>
-          </div>
-      
-          <section class="dass21-test" style="background-color:white;">
+        </div>
+
+        <section class="dass21-test">
             <div class="test-title">
-              <h2>DASS 21 Test</h2>
+                <h2>DASS 21 Test</h2>
             </div>
             <div class="question-container">
-
-              <h3 id="question-text">Loading question...</h3>
-              <div class="scale-options">
-                <button class="scale-btn" data-value="0">😐 0</button>
-                <button class="scale-btn" data-value="1">🙂 1</button>
-                <button class="scale-btn" data-value="2">😕 2</button>
-                <button class="scale-btn" data-value="3">😟 3</button>
-              </div>
-              <div class="progress-container">
-                <div class="progress-bar" id="progress-bar"></div>
-                            <div class="mini-progress" id="mini-progress"></div>
-
-              </div>
-              <div class="question-progress">
-                <p id="progress">1 / 21</p>
-              </div>
+                <h3 id="question-text">Loading question...</h3>
+                <div class="scale-options">
+                    <button class="scale-btn" data-value="0">😐 0</button>
+                    <button class="scale-btn" data-value="1">🙂 1</button>
+                    <button class="scale-btn" data-value="2">😕 2</button>
+                    <button class="scale-btn" data-value="3">😟 3</button>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="mini-progress" id="mini-progress"></div>
+                <div class="question-progress">
+                    <p id="progress">1 / 21</p>
+                </div>
             </div>
-          </section>
-        </main>
-      </div>
-      <div class="intro-form-overlay" id="introForm">
-  <form class="intro-form" id="userInfoForm">
-    <h2>Before You Start</h2>
-    
-    <label>Name (optional)</label>
-    <input type="text" name="name">
-     <label>Student ID</label>
-    <input type="text" name="name" required>
-   <label for="college">College</label>
-<select id="college" name="college" required>
-  <option value="">--Select--</option>
-  <option value="CASS">College of Arts and Social Sciences</option>
-  <option value="CEN">College of Engineering</option>
-  <option value="CBA">College of Business Administration</option>
-  <option value="COF">College of Fisheries</option>
-  <option value="CAG">College of Agriculture</option> 
-  <option value="CHSI">College of Home Science and Industry</option>
-  <option value="CED">College of Education</option>
-  <option value="COS">College of Sciences</option>
-  <option value="CVSM">College of Veterinary Science and Medicine</option>
-</select>
+        </section>
 
-<label for="program">Program</label>
-<select id="program" name="program" required>
-  <option value="">--Select a College First--</option>
-</select>
+        <!-- Results Section -->
+        <div class="results-container" id="resultsContainer">
+            <div class="results-header">
+                <h2>Your DASS-21 Results</h2>
+                <div class="encouragement-msg">
+                    Thank you for completing the assessment. These results are a snapshot of how you're feeling right now.
+                </div>
+            </div>
+            
+            <div class="scores-grid">
+                <div class="score-card">
+                    <h3>Depression</h3>
+                    <div class="score-value" id="depressionScore">0</div>
+                    <div class="score-interpretation" id="depressionInterpretation"></div>
+                    <div class="score-meter">
+                        <div class="score-meter-fill" id="depressionMeter"></div>
+                    </div>
+                </div>
+                
+                <div class="score-card">
+                    <h3>Anxiety</h3>
+                    <div class="score-value" id="anxietyScore">0</div>
+                    <div class="score-interpretation" id="anxietyInterpretation"></div>
+                    <div class="score-meter">
+                        <div class="score-meter-fill" id="anxietyMeter"></div>
+                    </div>
+                </div>
+                
+                <div class="score-card">
+                    <h3>Stress</h3>
+                    <div class="score-value" id="stressScore">0</div>
+                    <div class="score-interpretation" id="stressInterpretation"></div>
+                    <div class="score-meter">
+                        <div class="score-meter-fill" id="stressMeter"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="resources-section">
+                <h3>Recommended Resources</h3>
+                <ul class="resources-list">
+                    <li><a href="scheduler.html">Counseling Services</a></li>
+                    <li><a href="#">Mindfulness Exercises</a></li>
+                    <li><a href="#">Support Groups</a></li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="retake-btn" id="retakeBtn">Retake Test</button>
+                <button class="save-btn" id="saveBtn">Save Results</button>
+            </div>
+        </div>
+    </main>
 
-    <label>Year Level</label>
-    <select name="year" required>
-      <option value="">--Select--</option>
-      <option value="1">1st Year</option>
-      <option value="2">2nd Year</option>
-      <option value="3">3rd Year</option>
-      <option value="4">4th Year</option>
-    </select>
+    <div class="intro-form-overlay" id="introForm">
+        <form class="intro-form" id="userInfoForm">
+            <h2>Before You Start</h2>
+            
+            <label>Name (optional)</label>
+            <input type="text" name="name">
+            
+            <label>Student ID</label>
+            <input type="text" name="studentId" required>
+            
+            <label for="college">College</label>
+            <select id="college" name="college" required>
+                <option value="">--Select--</option>
+                <option value="CASS">College of Arts and Social Sciences</option>
+                <option value="CEN">College of Engineering</option>
+                <option value="CBA">College of Business Administration</option>
+                <option value="COF">College of Fisheries</option>
+                <option value="CAG">College of Agriculture</option> 
+                <option value="CHSI">College of Home Science and Industry</option>
+                <option value="CED">College of Education</option>
+                <option value="COS">College of Sciences</option>
+                <option value="CVSM">College of Veterinary Science and Medicine</option>
+            </select>
 
-    <label>Age</label>
-    <input type="number" name="age" min="15" required>
+            <label for="program">Program</label>
+            <select id="program" name="program" required>
+                <option value="">--Select a College First--</option>
+            </select>
 
-    <label>Gender</label>
-    <select name="gender" required>
-      <option value="">--Select--</option>
-      <option value="Female">Female</option>
-      <option value="Male">Male</option>
-      <option value="Non-binary">Non-binary</option>
-      <option value="Prefer not to say">Prefer not to say</option>
-    </select>
+            <label>Year Level</label>
+            <select name="year" required>
+                <option value="">--Select--</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+            </select>
 
-    <button type="submit">Continue</button>
-  </form>
-</div>
-    <script src="js/bell.js"></script>
-    <script src="js/question.js"></script>
-    <script src="js/progress-bar.js"></script>
-    <script src="js/summary.js"></script>
-    <script src="js/dropdown.js"></script>
-    <script src="js/intro-form.js"></script>
-  <script src="js/college-programs.js"></script>
+            <label>Age</label>
+            <input type="number" name="age" min="15" required>
+
+            <label>Gender</label>
+            <select name="gender" required>
+                <option value="">--Select--</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+
+            <button type="submit">Continue</button>
+        </form>
+    </div>
+
+    <script>
+        // Bell dropdown functionality
+        document.getElementById('bell-icon').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('bell-dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Profile dropdown functionality
+        document.getElementById('profile-img').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('profile-dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function() {
+            document.getElementById('bell-dropdown').style.display = 'none';
+            document.getElementById('profile-dropdown').style.display = 'none';
+        });
+
+        // College-Program mapping
+        const collegePrograms = {
+            'CASS': [
+                'Bachelor of Arts in English',
+                'Bachelor of Arts in Literature',
+                'Bachelor of Arts in Social Sciences',
+                'Bachelor of Arts in Development Communication',
+                'Bachelor of Arts in Psychology'
+            ],
+            'CEN': [
+                'Bachelor of Science in Civil Engineering',
+                'Bachelor of Science in Information Technology',
+                'Bachelor of Science in Agricultural Biosystems Engineering',
+            ],
+            'CBA': [
+                'Bachelor of Science in Accountancy',
+                'Bachelor of Science in Business Administration',
+                'Bachelor of Science in Entrepreneurship',
+                'Bachelor of Science in Management Accounting'
+            ],
+            'COF': [
+                'Bachelor of Science in Fisheries'
+            ],
+            'CAG': [
+                'Bachelor of Science in Agriculture',
+                'Bachelor of Science in Agribusiness',
+                'Bachelor of Science in Animal Science',
+                'Bachelor of Science in Crop Science'
+            ],
+            'CHSI': [
+                'Bachelor of Science in Food Technology',
+                'Bachelor of Science in Fashion and Textile Technology',
+                'Bachelor of Science in Hospitality Management',
+                'Bachelor of Science in Tourism Management'
+            ],
+            'CED': [
+                'Bachelor of Elementary Education',
+                'Bachelor of Secondary Education',
+                'Bachelor of Cultural and Arts Education',
+                'Bachelor of Early Childhood Education',
+
+            ],
+            'COS': [
+                'Bachelor of Science in Biology',
+                'Bachelor of Science in Chemistry',
+                'Bachelor of Science in Environmental Science',
+                'Bachelor of Science in Mathematics',
+                'Bachelor of Science in Statistics',
+                'Bachelor of Science in Meteorology'
+            ],
+            'CVSM': [
+                'Doctor of Veterinary Medicine'
+            ]
+        };
+
+        // Update program dropdown when college changes
+        document.getElementById('college').addEventListener('change', function() {
+            const college = this.value;
+            const programSelect = document.getElementById('program');
+            
+            // Clear existing options
+            programSelect.innerHTML = '<option value="">--Select a Program--</option>';
+            
+            if (college && collegePrograms[college]) {
+                collegePrograms[college].forEach(program => {
+                    const option = document.createElement('option');
+                    option.value = program;
+                    option.textContent = program;
+                    programSelect.appendChild(option);
+                });
+            }
+        });
+
+        // Show intro form on page load
+        window.addEventListener('load', function() {
+            document.getElementById('introForm').style.display = 'flex';
+        });
+
+        // Handle intro form submission
+        document.getElementById('userInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Store form data if needed
+            const formData = new FormData(this);
+            // Hide the form
+            document.getElementById('introForm').style.display = 'none';
+            // Initialize the test
+            initializeTest();
+        });
+
+        // DASS-21 Questions
+        const questions = [
+            "I found myself getting upset by quite trivial things",
+            "I was aware of dryness of my mouth",
+            "I couldn't seem to experience any positive feeling at all",
+            "I experienced breathing difficulty (eg, excessively rapid breathing, breathlessness in the absence of physical exertion)",
+            "I just couldn't seem to get going",
+            "I tended to over-react to situations",
+            "I had a feeling of shakiness (eg, legs going to give way)",
+            "I found it difficult to relax",
+            "I found myself in situations that made me so anxious I was most relieved when they ended",
+            "I felt that I had nothing to look forward to",
+            "I found myself getting upset rather easily",
+            "I felt that I was using a lot of nervous energy",
+            "I felt sad and depressed",
+            "I found myself getting impatient when I was delayed in any way (eg, elevators, traffic lights, being kept waiting)",
+            "I had a feeling of faintness",
+            "I felt that I had lost interest in just about everything",
+            "I felt I wasn't worth much as a person",
+            "I felt that I was rather touchy",
+            "I perspired noticeably (eg, hands sweaty) in the absence of high temperatures or physical exertion",
+            "I felt scared without any good reason",
+            "I felt that life wasn't worthwhile"
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function initializeTest() {
+            updateQuestion();
+            updateProgress();
+            createMiniProgress();
+        }
+
+        function updateQuestion() {
+            document.getElementById('question-text').textContent = questions[currentQuestion];
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = progress + '%';
+            progressBar.classList.add('pulse');
+            setTimeout(() => progressBar.classList.remove('pulse'), 300);
+            
+            document.getElementById('progress').textContent = `${currentQuestion + 1} / ${questions.length}`;
+            
+            // Update mini progress dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if (index <= currentQuestion) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function createMiniProgress() {
+            const miniProgress = document.getElementById('mini-progress');
+            miniProgress.innerHTML = '';
+            
+            for (let i = 0; i < questions.length; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (i === 0) dot.classList.add('active');
+                miniProgress.appendChild(dot);
+            }
+        }
+
+        // Handle answer selection
+        document.querySelectorAll('.scale-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const value = parseInt(this.dataset.value);
+                answers[currentQuestion] = value;
+                
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    updateQuestion();
+                    updateProgress();
+                } else {
+                    // Test completed
+                    showResults();
+                }
+            });
+        });
+
+        function getInterpretation(score, category) {
+            if (category === 'depression') {
+                if (score <= 9) return "Normal range";
+                if (score <= 13) return "Mild depression";
+                if (score <= 20) return "Moderate depression";
+                if (score <= 27) return "Severe depression";
+                return "Extremely severe depression";
+            } else if (category === 'anxiety') {
+                if (score <= 7) return "Normal range";
+                if (score <= 9) return "Mild anxiety";
+                if (score <= 14) return "Moderate anxiety";
+                if (score <= 19) return "Severe anxiety";
+                return "Extremely severe anxiety";
+            } else if (category === 'stress') {
+                if (score <= 14) return "Normal range";
+                if (score <= 18) return "Mild stress";
+                if (score <= 25) return "Moderate stress";
+                if (score <= 33) return "Severe stress";
+                return "Extremely severe stress";
+            }
+            return "";
+        }
+
+           function showResults() {
+        // Hide question container
+        document.querySelector('.question-container').style.display = 'none';
+        
+        // Calculate scores
+        const depression = answers.filter((_, i) => [2, 4, 9, 12, 15, 16, 20].includes(i)).reduce((a, b) => a + b, 0) * 2;
+        const anxiety = answers.filter((_, i) => [1, 3, 6, 8, 14, 18, 19].includes(i)).reduce((a, b) => a + b, 0) * 2;
+        const stress = answers.filter((_, i) => [0, 5, 7, 10, 11, 13, 17].includes(i)).reduce((a, b) => a + b, 0) * 2;
+        
+        // Update results display
+        document.getElementById('depressionScore').textContent = depression;
+        document.getElementById('anxietyScore').textContent = anxiety;
+        document.getElementById('stressScore').textContent = stress;
+        
+        // Set interpretations
+        document.getElementById('depressionInterpretation').textContent = getInterpretation(depression, 'depression');
+        document.getElementById('anxietyInterpretation').textContent = getInterpretation(anxiety, 'anxiety');
+        document.getElementById('stressInterpretation').textContent = getInterpretation(stress, 'stress');
+        
+        // Animate meter fills
+        setTimeout(() => {
+            document.getElementById('depressionMeter').style.width = `${Math.min(100, depression * 2)}%`;
+            document.getElementById('anxietyMeter').style.width = `${Math.min(100, anxiety * 2)}%`;
+            document.getElementById('stressMeter').style.width = `${Math.min(100, stress * 2)}%`;
+        }, 100);
+        
+        // Show results container
+        document.getElementById('resultsContainer').style.display = 'block';
+        
+        // Scroll to results
+        document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Retake test button functionality
+    document.getElementById('retakeBtn').addEventListener('click', function() {
+        // Reset test state
+        currentQuestion = 0;
+        answers = [];
+        
+        // Reset progress bar
+        document.getElementById('progress-bar').style.width = '0%';
+        
+        // Reset mini progress dots
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            dot.classList.remove('active');
+            if (index === 0) dot.classList.add('active');
+        });
+        
+        // Update question counter
+        document.getElementById('progress').textContent = `1 / ${questions.length}`;
+        
+        // Show question container and hide results
+        document.querySelector('.question-container').style.display = 'block';
+        document.getElementById('resultsContainer').style.display = 'none';
+        
+        // Reset the first question
+        updateQuestion();
+        
+        // Scroll to the test section
+        document.querySelector('.dass21-test').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Save results button functionality
+    document.getElementById('saveBtn').addEventListener('click', function() {
+        alert('Results saved to your profile');
+        // Here you would typically send the results to your backend
+    });
+    </script>
 </body>
 </html>

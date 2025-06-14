@@ -5,135 +5,367 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Data | CalmConnect</title>
 
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/summary.css">
-  <link rel="stylesheet" href="css/profile-dropdown.css">
-  <link rel="stylesheet" href="css/sidebar.css">
-  <link rel="stylesheet" href="css/data-panel.css">
+  <!-- External Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.css" />
   <link rel="icon" type="image/x-icon" href="img/favicon.png" />
+  <link rel="stylesheet" href="css/data-panel.css">
+  <link rel="stylesheet" href="css/dropdown.css">
+  
+  <style>
+  
+  </style>
 </head>
 <body>
+  <!-- Header Section - Exactly matching admin panel -->
   <header>
     <div class="hdr">
-      <div class="hdr-logo"><a href="#"><h2>CalmConnect</h2></a></div>
+      <div class="hdr-logo">
+        <h2>CalmConnect</h2>
+      </div>
       <div class="hdr-btns">
-        <div class="prfl-bell dropdown">
-          <i class="bx bxs-bell" id="bell-icon"></i>
-          <div class="dropdown-menu" id="bell-dropdown"><p>No new notifications</p></div>
+        <div class="prfl-bell">
+          <i class="bx bxs-bell"></i>
         </div>
-        <div class="prfl-name"><h4>Username</h4></div>
-        <div class="prfl-container dropdown">
-          <img src="img/default.jpg" alt="Profile Picture" id="profile-img" />
-          <div class="dropdown-menu" id="profile-dropdown">
-            <a href="#">Settings</a>
-            <a href="login.html">Log out</a>
-            <a href="user-profile.html">Profile</a>
-          </div>
+        <div class="prfl-name">
+          <h4>Admin User</h4>
+        </div>
+        <div class="prfl-container">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Profile" />
         </div>
       </div>
     </div>
   </header>
 
-  <div class="data-collection">
+  <!-- Main Dashboard Layout - Using admin panel structure -->
+  <div class="admin-dashboard">
+    <!-- Sidebar Navigation - Exactly matching admin panel -->
     <aside class="sidebar">
       <div class="sidebar-logo"><h3>Admin Panel</h3></div>
       <nav class="sidebar-nav">
-        <a href="admin-panel.html"><i class='bx bxs-home'></i> Dashboard</a>
-        <a href="admin-data.html" class="active"><i class='bx bxs-data'></i> Data</a>
+        <a href="admin-panel.html"><i class="bx bxs-home"></i> Dashboard</a>
+        <a href="#" class="active"><i class='bx bxs-data'></i> Data</a>
         <a href="admin-appointments.html"><i class='bx bxs-calendar-week'></i> Appointments</a>
         <a href="admin-archive.html"><i class='bx bxs-archive'></i> Archives</a>
         <a href="admin-personnel.html"><i class="bx bxs-user-badge"></i> Personnel</a>
-
       </nav>
     </aside>
 
-    <main class="data-main">
-      <div class="data-title">
-        <h2>Data Collection Dashboard</h2>
-        <p class="subtitle">Review and visualize mental health data across all colleges and programs</p>
-      </div>
-
-      <section class="data-chart">
-        <h3> Filter By College</h3>
-        <label for="collegeSelector">Choose a college:</label>
-        <select id="collegeSelector">
-          <option value="">-- Select College --</option>
-          <option value="CASS">College of Arts and Social Sciences</option>
-          <option value="CEN">College of Engineering</option>
-          <option value="CBA">College of Business Administration</option>
-          <option value="COF">College of Fisheries</option>
-          <option value="CAG">College of Agriculture</option>
-          <option value="CHSI">College of Home Science and Industry</option>
-          <option value="CED">College of Education</option>
-          <option value="COS">College of Sciences</option>
-          <option value="CVSM">College of Veterinary Science and Medicine</option>
-        </select>
-        <canvas id="collegeChart" width="100%" height="40"></canvas>
-      </section>
-
-      <section class="data-chart">
-        <h3> Combined College Overview</h3>
-        <p>A quick summary of average anxiety, depression, and stress scores across all colleges.</p>
-        <canvas id="combinedCollegeChart" width="100%" height="40"></canvas>
-        <div class="export-chart-buttons">
-  <button onclick="exportChartAsImage('collegeChart')">Download College Chart (PNG)</button>
-  <button onclick="exportChartAsImage('combinedCollegeChart')">Download Combined Chart (PNG)</button>
-  <button onclick="exportChartAsPDF()">Export Charts to PDF</button>
-</div>
-
-      </section>
-
-      <section class="data-list">
-        <div class="export-controls">
-  <button onclick="exportToCSV()">Export to CSV</button>
-  <button onclick="exportToPDF()">Export to PDF</button>
-  <button onclick="exportToExcel()">Export to Excel</button>
-
-</div>
-        <h3>📋 DASS21 Test Responses</h3>
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Date</th>
-              <th>Anxiety</th>
-              <th>Depression</th>
-              <th>Stress</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>student01</td>
-              <td>2025-05-17</td>
-              <td>12</td>
-              <td>18</td>
-              <td>20</td>
-            </tr>
-            <tr>
-              <td>student02</td>
-              <td>2025-05-16</td>
-              <td>5</td>
-              <td>8</td>
-              <td>10</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </main>
+    <!-- Main Content Area - Using admin panel grid -->
+    <main class="admin-options">
+  <div class="dashboard-welcome">
+    <h1>DASS-21 Data Dashboard</h1>
+    <p>Real-time mental health data across colleges</p>
   </div>
 
-  <script src="js/bell.js"></script>
-  <script src="js/question.js"></script>
-  <script src="js/progress-bar.js"></script>
-  <script src="js/summary.js"></script>
-  <script src="js/dropdown.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="js/chart.js"></script>
-  <script src="js/data-export.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <!-- College-wise Chart -->
+  <section class="data-chart">
+    <h3>College-Based Mental Health Stats</h3>
+    <label for="collegeSelector">Filter by College:</label>
+    <select id="collegeSelector">
+      <option value="all">All Colleges</option>
+      <option value="CASS">CASS (Arts & Social Sciences)</option>
+      <option value="CEN">CEN (Engineering)</option>
+      <option value="CSM">CSM (Science & Math)</option>
+      <option value="CBA">CBA (Business Admin)</option>
+      <option value="CED">CED (Education)</option>
+    </select>
+    <canvas id="collegeChart"></canvas>
+    <div class="export-chart-buttons">
+      <button onclick="exportChart('png')"><i class="bx bx-download"></i> PNG</button>
+      <button onclick="exportChart('pdf')"><i class="bx bx-file-pdf"></i> PDF</button>
+    </div>
+  </section>
 
+  <!-- Combined Overview -->
+  <section class="data-chart">
+    <h3>Overall Wellness Trends</h3>
+    <canvas id="combinedCollegeChart"></canvas>
+    <div class="export-chart-buttons">
+      <button onclick="exportCombinedChart('png')"><i class="bx bx-download"></i> PNG</button>
+      <button onclick="exportCombinedChart('pdf')"><i class="bx bx-file-pdf"></i> PDF</button>
+    </div>
+  </section>
+
+  <!-- Wellness Table -->
+  <section class="data-list">
+    <h3>DASS-21 Response Data</h3>
+    <div class="export-controls">
+      <button onclick="exportToCSV()"><i class="bx bx-spreadsheet"></i> CSV</button>
+      <button onclick="exportToExcel()"><i class="bx bx-file"></i> Excel</button>
+      <button onclick="printTable()"><i class="bx bx-printer"></i> Print</button>
+    </div>
+    <table class="data-table" id="dataTable">
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>College</th>
+          <th>Depression</th>
+          <th>Anxiety</th>
+          <th>Stress</th>
+          <th>Overall Score</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+  <tr>
+    <td>S1001</td>
+    <td>CASS</td>
+    <td>12</td>
+    <td>10</td>
+    <td>15</td>
+    <td>12.33</td>
+    <td><span class="status-warning">Moderate</span></td>
+    <td>2023-10-15</td>
+  </tr>
+  <tr>
+    <td>S1002</td>
+    <td>CEN</td>
+    <td>18</td>
+    <td>16</td>
+    <td>21</td>
+    <td>18.33</td>
+    <td><span class="status-warning">Severe</span></td>
+    <td>2023-10-16</td>
+  </tr>
+  <tr>
+    <td>S1003</td>
+    <td>CSM</td>
+    <td>6</td>
+    <td>7</td>
+    <td>8</td>
+    <td>7.00</td>
+    <td><span class="status-active">Normal</span></td>
+    <td>2023-10-17</td>
+  </tr>
+  <tr>
+    <td>S1004</td>
+    <td>CBA</td>
+    <td>9</td>
+    <td>14</td>
+    <td>12</td>
+    <td>11.67</td>
+    <td><span class="status-warning">Mild</span></td>
+    <td>2023-10-18</td>
+  </tr>
+  <tr>
+    <td>S1005</td>
+    <td>CED</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <td>5.00</td>
+    <td><span class="status-active">Normal</span></td>
+    <td>2023-10-19</td>
+  </tr>
+  <tr>
+    <td>S1006</td>
+    <td>CASS</td>
+    <td>15</td>
+    <td>12</td>
+    <td>18</td>
+    <td>15.00</td>
+    <td><span class="status-warning">Moderate</span></td>
+    <td>2023-10-20</td>
+  </tr>
+  <tr>
+    <td>S1007</td>
+    <td>CEN</td>
+    <td>21</td>
+    <td>19</td>
+    <td>23</td>
+    <td>21.00</td>
+    <td><span class="status-warning">Extremely Severe</span></td>
+    <td>2023-10-21</td>
+  </tr>
+</tbody>
+
+    </table>
+  </section>
+</main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script src="js/bell.js"></script>
+  <script src="js/dropdown.js"></script>
+
+  <script>
+    // Sample DASS-21 data for colleges
+    const collegeData = {
+      labels: ['CASS', 'CEN', 'CSM', 'CBA', 'CED'],
+      depression: [13.5, 19.5, 7.2, 10.8, 6.3],
+      anxiety: [11.0, 17.5, 8.1, 12.4, 7.2],
+      stress: [16.5, 22.0, 9.3, 14.2, 8.7]
+    };
+
+    // Initialize college chart
+    const collegeChartCtx = document.getElementById('collegeChart').getContext('2d');
+    const collegeChart = new Chart(collegeChartCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Depression', 'Anxiety', 'Stress'],
+        datasets: [{
+          label: 'CASS',
+          data: [13.5, 11.0, 16.5],
+          backgroundColor: 'rgba(75, 192, 192, 0.7)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 42,
+            title: {
+              display: true,
+              text: 'DASS-21 Score'
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'DASS-21 Scores by Category',
+            font: {
+              size: 16
+            }
+          },
+          legend: {
+            position: 'top'
+          }
+        }
+      }
+    });
+
+    // Initialize combined college chart
+    const combinedChartCtx = document.getElementById('combinedCollegeChart').getContext('2d');
+    const combinedCollegeChart = new Chart(combinedChartCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Depression', 'Anxiety', 'Stress'],
+        datasets: [
+          {
+            label: 'CASS',
+            data: [13.5, 11.0, 16.5],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 2
+          },
+          {
+            label: 'CEN',
+            data: [19.5, 17.5, 22.0],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 2
+          },
+          {
+            label: 'CSM',
+            data: [7.2, 8.1, 9.3],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 2
+          },
+          {
+            label: 'CBA',
+            data: [10.8, 12.4, 14.2],
+            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+            borderWidth: 2
+          },
+          {
+            label: 'CED',
+            data: [6.3, 7.2, 8.7],
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            angleLines: {
+              display: true
+            },
+            suggestedMin: 0,
+            suggestedMax: 25
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'College Comparison of DASS-21 Scores',
+            font: {
+              size: 16
+            }
+          },
+          legend: {
+            position: 'top'
+          }
+        }
+      }
+    });
+
+    // College selector functionality
+    document.getElementById('collegeSelector').addEventListener('change', function() {
+      const selectedCollege = this.value;
+      
+      if (selectedCollege === 'all') {
+        // Show all colleges in combined chart
+        combinedCollegeChart.data.datasets.forEach(dataset => {
+          dataset.hidden = false;
+        });
+        combinedCollegeChart.update();
+        
+        // Reset bar chart to default (CASS)
+        collegeChart.data.datasets[0].data = [13.5, 11.0, 16.5];
+        collegeChart.data.datasets[0].label = 'CASS';
+        collegeChart.update();
+      } else {
+        // Hide all colleges except selected in combined chart
+        combinedCollegeChart.data.datasets.forEach(dataset => {
+          dataset.hidden = dataset.label !== selectedCollege;
+        });
+        combinedCollegeChart.update();
+        
+        // Update bar chart with selected college data
+        const collegeIndex = collegeData.labels.indexOf(selectedCollege);
+        collegeChart.data.datasets[0].data = [
+          collegeData.depression[collegeIndex],
+          collegeData.anxiety[collegeIndex],
+          collegeData.stress[collegeIndex]
+        ];
+        collegeChart.data.datasets[0].label = selectedCollege;
+        collegeChart.update();
+      }
+    });
+
+    // Export functions (placeholder implementations)
+    function exportChart(format) {
+      alert(`Exporting chart as ${format.toUpperCase()}`);
+    }
+    
+    function exportCombinedChart(format) {
+      alert(`Exporting combined chart as ${format.toUpperCase()}`);
+    }
+    
+    function exportToCSV() {
+      alert('Exporting table data to CSV');
+    }
+    
+    function exportToExcel() {
+      alert('Exporting table data to Excel');
+    }
+    
+    function printTable() {
+      alert('Printing table data');
+    }
+  </script>
 </body>
 </html>

@@ -11,22 +11,25 @@ function openAddModal() {
 
 function openEditModal(button) {
   const row = button.closest("tr");
-  const name = row.querySelector("td:nth-child(1)").textContent;
-  const email = row.querySelector("td:nth-child(2)").textContent;
-  const unit = row.querySelector("td:nth-child(3)").textContent;
-  const rank = row.querySelector("td:nth-child(4)").textContent;
-  const img = row.querySelector("img")?.src || "img/default.jpg";
+  const cells = row.querySelectorAll("td");
+
+  const photoSrc = cells[0].querySelector("img").src;
+  const name = cells[1].textContent;
+  const email = cells[2].textContent;
+  const unit = cells[3].textContent;
+  const rank = cells[4].textContent;
 
   document.getElementById("modal-title").textContent = "Edit Counselor";
+  document.getElementById("photoPreview").src = photoSrc;
   document.getElementById("nameInput").value = name;
   document.getElementById("emailInput").value = email;
   document.getElementById("unitInput").value = unit;
   document.getElementById("rankInput").value = rank;
-  document.getElementById("photoPreview").src = img;
 
-  editTargetRow = row;
   document.getElementById("personnel-modal").style.display = "block";
 }
+
+
 
 function closeModal() {
   document.getElementById("personnel-modal").style.display = "none";
@@ -53,30 +56,25 @@ document.getElementById("personnel-form").addEventListener("submit", function (e
   const rank = document.getElementById("rankInput").value;
   const photo = document.getElementById("photoPreview").src;
 
-  if (editTargetRow) {
-    // Edit existing
-    editTargetRow.querySelector("td:nth-child(1)").innerHTML = `<img src="${photo}" class="table-img" /> ${name}`;
-    editTargetRow.querySelector("td:nth-child(2)").textContent = email;
-    editTargetRow.querySelector("td:nth-child(3)").textContent = unit;
-    editTargetRow.querySelector("td:nth-child(4)").textContent = rank;
-  } else {
-    // Add new
-    const newRow = document.createElement("tr");
-    newRow.innerHTML = `
-      <td><img src="${photo}" class="table-img" /> ${name}</td>
-      <td>${email}</td>
-      <td>${unit}</td>
-      <td>${rank}</td>
-      <td>
-        <button onclick="openEditModal(this)">Edit</button>
-        <button onclick="archiveCounselor('${name}')">Archive</button>
-      </td>
-    `;
-    document.getElementById("counselor-list").appendChild(newRow);
-  }
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `
+    <td><img src="${photo}" class="counselor-photo" alt="${name}" /></td>
+    <td>${name}</td>
+    <td>${email}</td>
+    <td>${unit}</td>
+    <td>${rank}</td>
+    <td>
+      <button onclick="openEditModal(this)">Edit</button>
+      <button onclick="archiveCounselor('${name}')">Archive</button>
+    </td>
+  `;
 
+  document.getElementById("counselor-list").appendChild(newRow);
   closeModal();
+  this.reset();
+  document.getElementById("photoPreview").src = "img/default.jpg";
 });
+
 
 function archiveCounselor(name) {
   if (confirm(`Archive counselor ${name}?`)) {

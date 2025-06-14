@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Archives | CalmConnect</title>
-
-  <link rel="stylesheet" href="css/index.css" />
-  <link rel="stylesheet" href="css/sidebar.css" />
-  <link rel="stylesheet" href="css/profile-dropdown.css" />
-  <link rel="stylesheet" href="css/admin-archive.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
+  <link rel="stylesheet" href="css/admin-panel.css">
+  <link rel="stylesheet" href="css/dropdown.css">
+  <link rel="stylesheet" href="css/admin-panel-enhanced.css">
   <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="css/profile-dropdown.css">
+  <link rel="stylesheet" href="css/admin-archive.css">
 </head>
 <body>
   <header>
     <div class="hdr">
-      <div class="hdr-logo"><a href="#"><h2>CalmConnect</h2></a></div>
+      <div class="hdr-logo"><h2>CalmConnect</h2></div>
       <div class="hdr-btns">
         <div class="prfl-bell dropdown">
           <i class="bx bxs-bell" id="bell-icon"></i>
@@ -23,9 +23,9 @@
             <p>No new notifications</p>
           </div>
         </div>
-        <div class="prfl-name"><h4>Username</h4></div>
+        <div class="prfl-name"><h4>Admin User</h4></div>
         <div class="prfl-container dropdown">
-          <img src="img/default.jpg" alt="Profile" id="profile-img" />
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Profile" id="profile-img" />
           <div class="dropdown-menu" id="profile-dropdown">
             <a href="#">Settings</a>
             <a href="login.html">Log out</a>
@@ -36,7 +36,7 @@
     </div>
   </header>
 
-  <div class="dashboard-layout">
+  <div class="admin-dashboard">
     <aside class="sidebar">
       <div class="sidebar-logo"><h3>Admin Panel</h3></div>
       <nav class="sidebar-nav">
@@ -45,13 +45,17 @@
         <a href="admin-appointments.html"><i class='bx bxs-calendar-week'></i> Appointments</a>
         <a href="admin-archive.html" class="active"><i class="bx bxs-archive"></i> Archives</a>
         <a href="admin-personnel.html"><i class="bx bxs-user-badge"></i> Personnel</a>
-
       </nav>
     </aside>
 
-    <main class="archive-main">
+    <main class="admin-options">
+      <div class="dashboard-welcome">
+        <h1>Archive Management</h1>
+        <p>View and manage archived records and data</p>
+      </div>
+
       <div class="archive-nav-buttons">
-        <button class="archive-btn" data-type="appointments">
+        <button class="archive-btn active" data-type="appointments">
           <i class='bx bxs-calendar-check'></i> Appointments
         </button>
         <button class="archive-btn" data-type="dass21">
@@ -62,133 +66,221 @@
         </button>
       </div>
 
-      <!-- Appointments Section -->
-      <section id="appointmentsArchive" class="archive-section">
-        <h3>Past Appointments</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Student</th>
-              <th>Student ID</th>
-              <th>College</th>
-              <th>Program</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Counselor</th>
-              <th>Reason</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Student01</td>
-              <td>2023-00001</td>
-              <td>CASS</td>
-              <td>Bachelor of Arts in Communication</td>
-              <td>2025-06-01</td>
-              <td>10:00 AM</td>
-              <td>Ms. Rivera</td>
-              <td>Follow-up</td>
-              <td>
-  <button  onclick='showArchiveModal("appointments", {
-    student: "Student01",
-    date: "2025-06-01",
-    time: "10:00 AM",
-    counselor: "Ms. Rivera",
-    reason: "Follow-up"
-  })'> <i class='bx bx-show'></i> View</button>
-</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+      <div class="archive-content">
+        <!-- Appointments Section -->
+        <section id="appointmentsArchive" class="archive-section active">
+          <div class="section-header">
+            <h3>Past Appointments</h3>
+            <div class="section-actions">
+              <button class="filter-btn"><i class='bx bxs-filter-alt'></i> Filter</button>
+              <button class="export-btn"><i class='bx bxs-download'></i> Export</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Student ID</th>
+                  <th>College</th>
+                  <th>Program</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Counselor</th>
+                  <th>Reason</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Student01</td>
+                  <td>2023-00001</td>
+                  <td>CASS</td>
+                  <td>Bachelor of Arts in Communication</td>
+                  <td>2025-06-01</td>
+                  <td>10:00 AM</td>
+                  <td>Ms. Rivera</td>
+                  <td>Follow-up</td>
+                  <td>
+                    <button class="view-btn" onclick='showArchiveModal("appointments", {
+                      student: "Student01",
+                      date: "2025-06-01",
+                      time: "10:00 AM",
+                      counselor: "Ms. Rivera",
+                      reason: "Follow-up"
+                    })'><i class='bx bx-show'></i> View</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Student02</td>
+                  <td>2023-00002</td>
+                  <td>CET</td>
+                  <td>Bachelor of Science in Computer Science</td>
+                  <td>2025-05-28</td>
+                  <td>2:00 PM</td>
+                  <td>Dr. Martinez</td>
+                  <td>Academic Support</td>
+                  <td>
+                    <button class="view-btn" onclick='showArchiveModal("appointments", {
+                      student: "Student02",
+                      date: "2025-05-28",
+                      time: "2:00 PM",
+                      counselor: "Dr. Martinez",
+                      reason: "Academic Support"
+                    })'><i class='bx bx-show'></i> View</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Student03</td>
+                  <td>2023-00003</td>
+                  <td>CBA</td>
+                  <td>Bachelor of Science in Business Administration</td>
+                  <td>2025-05-25</td>
+                  <td>9:30 AM</td>
+                  <td>Ms. Johnson</td>
+                  <td>Career Guidance</td>
+                  <td>
+                    <button class="view-btn" onclick='showArchiveModal("appointments", {
+                      student: "Student03",
+                      date: "2025-05-25",
+                      time: "9:30 AM",
+                      counselor: "Ms. Johnson",
+                      reason: "Career Guidance"
+                    })'><i class='bx bx-show'></i> View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-      <!-- DASS21 Section -->
-      <section id="dass21Archive" class="archive-section" style="display:none;">
-        <h3>DASS21 Results</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Student</th>
-              <th>Date</th>
-              <th>Anxiety</th>
-              <th>Depression</th>
-              <th>Stress</th>
-              <th>Remarks</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Student02</td>
-              <td>2025-05-16</td>
-              <td>24</td>
-              <td>22</td>
-              <td>30</td>
-              <td>High Risk</td>
-              <td><button onclick='showArchiveModal("dass21", {
-                user: "Student02",
-                date: "2025-05-16",
-                anxiety: 24,
-                depression: 22,
-                stress: 30,
-                remarks: "High Risk"
-              })'>View</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+        <!-- DASS21 Section -->
+        <section id="dass21Archive" class="archive-section">
+          <div class="section-header">
+            <h3>DASS21 Assessment Results</h3>
+            <div class="section-actions">
+              <button class="filter-btn"><i class='bx bxs-filter-alt'></i> Filter</button>
+              <button class="export-btn"><i class='bx bxs-download'></i> Export</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Date Completed</th>
+                  <th>Depression Score</th>
+                  <th>Anxiety Score</th>
+                  <th>Stress Score</th>
+                  <th>Risk Level</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2023-00001</td>
+                  <td>2025-05-30</td>
+                  <td>8</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td><span style="color: #f39c12; font-weight: bold;">Moderate</span></td>
+                  <td>
+                    <button class="view-btn" onclick='showArchiveModal("dass21", {
+                      studentId: "2023-00001",
+                      date: "2025-05-30",
+                      depression: 8,
+                      anxiety: 12,
+                      stress: 10,
+                      riskLevel: "Moderate"
+                    })'><i class='bx bx-show'></i> View</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2023-00002</td>
+                  <td>2025-05-29</td>
+                  <td>15</td>
+                  <td>18</td>
+                  <td>16</td>
+                  <td><span style="color: #e74c3c; font-weight: bold;">High</span></td>
+                  <td>
+                    <button class="view-btn" onclick='showArchiveModal("dass21", {
+                      studentId: "2023-00002",
+                      date: "2025-05-29",
+                      depression: 15,
+                      anxiety: 18,
+                      stress: 16,
+                      riskLevel: "High"
+                    })'><i class='bx bx-show'></i> View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-      <!-- Employees Section -->
-      <section id="employeesArchive" class="archive-section" style="display:none;">
-        <h3>Archived Employees</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Unit</th>
-              <th>Rank</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Theresa Cruz</td>
-              <td>tcruz@example.com</td>
-              <td>Student Wellness Center</td>
-              <td>Assistant Professor</td>
-              <td>
-<button onclick='showArchiveModal("employee", {
-  name: "Theresa Cruz",
-  email: "tcruz@example.com",
-  role: "Counselor",
-  unit: "Student Wellness Center",
-  rank: "Assistant Professor I"
-})'><i class="bx bx-show"></i> View</button>
-</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+        <!-- Employees Section -->
+        <section id="employeesArchive" class="archive-section">
+          <div class="section-header">
+            <h3>Former Employees</h3>
+            <div class="section-actions">
+              <button class="filter-btn"><i class='bx bxs-filter-alt'></i> Filter</button>
+              <button class="export-btn"><i class='bx bxs-download'></i> Export</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Employee ID</th>
+                  <th>Position</th>
+                  <th>Department</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Dr. Sarah Wilson</td>
+                  <td>EMP-2020-01</td>
+                  <td>Senior Counselor</td>
+                  <td>Student Services</td>
+                  <td>2020-01-15</td>
+                  <td>2025-04-30</td>
+                  <td>
+                    <button class="view-btn" onclick='showArchiveModal("employees", {
+                      name: "Dr. Sarah Wilson",
+                      employeeId: "EMP-2020-01",
+                      position: "Senior Counselor",
+                      department: "Student Services",
+                      startDate: "2020-01-15",
+                      endDate: "2025-04-30"
+                    })'><i class='bx bx-show'></i> View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
     </main>
   </div>
 
   <!-- Archive Modal -->
-  <div id="archive-modal" class="modal" style="display:none;">
+  <div id="archive-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeArchiveModal()">&times;</span>
       <h3 id="modal-title">Archive Details</h3>
       <div id="modal-body"></div>
-      <button id="downloadPdfBtn" class="download-btn">Download Report as PDF</button>
-
+      <button id="downloadPdfBtn" class="download-btn">
+        <i class='bx bxs-download'></i> Download Report as PDF
+      </button>
     </div>
   </div>
 
-  <script src="js/archive-options.js"></script>
-  <script src="js/archive-modal.js"></script>
-  <script src="js/archive-navigation.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  
-</body>
+  <script src="js/admin-archive.js"></script>
+  <script src="js/bell.js"></script>
+  <script src="js/dropdown.js"></script>
+</body> 
 </html>

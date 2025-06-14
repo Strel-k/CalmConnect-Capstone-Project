@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile | CalmConnect</title>
+  <meta name="description" content="Counselor profile management">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
+  <style>
+    :root {
+      --primary-color: #2ecc71;
+      --primary-dark: #27ae60;
+      --secondary-blue: #3498db;
+      --secondary-blue-dark: #2980b9;
+      --secondary-purple: #9b59b6;
+      --secondary-purple-dark: #8e44ad;
+      --secondary-orange: #e67e22;
+      --secondary-orange-dark: #d35400;
+      --secondary-red: #e74c3c;
+      --secondary-red-dark: #c0392b;
+      --text-dark: #2c3e50;
+      --text-medium: #666;
+      --text-light: #999;
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hdr-logo h2 {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .hdr-btns {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .prfl-bell {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .prfl-bell i {
+      font-size: 1.3rem;
+      color: var(--text-medium);
+      transition: color 0.3s ease;
+    }
+
+    .prfl-bell:hover i {
+      color: var(--primary-color);
+    }
+
+    .prfl-name h4 {
+      color: #333;
+      font-weight: 600;
+    }
+
+    .prfl-container img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid var(--primary-color);
+      object-fit: cover;
+    }
+
+    /* Dashboard Layout */
+    .counselor-dashboard {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 2rem;
+      padding: 2rem;
+      min-height: calc(100vh - 120px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-logo h3 {
+      color: var(--primary-color);
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text-medium);
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      transform: translateX(5px);
+      box-shadow: 0 2px 10px rgba(46, 204, 113, 0.3);
+    }
+
+    .sidebar-nav a i {
+      font-size: 1.2rem;
+    }
+
+    /* Main Content */
+    .profile-main {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .profile-header h2 {
+      color: var(--text-dark);
+      font-size: 1.8rem;
+    }
+
+    .profile-header p {
+      color: var(--text-medium);
+    }
+
+    /* Profile Sections */
+    .profile-section {
+      margin-bottom: 3rem;
+    }
+
+    .profile-section h3 {
+      color: var(--text-dark);
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #eee;
+    }
+
+    /* Profile Card */
+    .profile-card {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .profile-picture {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--primary-color);
+    }
+
+    .profile-picture img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-picture-edit {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-picture-edit:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .profile-info h4 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .profile-info p {
+      color: var(--text-medium);
+      margin-bottom: 1rem;
+    }
+
+    .profile-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-medium);
+    }
+
+    /* Profile Form */
+    .profile-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-medium);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* Specialization Tags */
+    .specialization-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      background: #e3f2fd;
+      color: var(--secondary-blue-dark);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .tag-remove {
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .tag-input-container {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .tag-input-container input {
+      flex: 1;
+    }
+
+    /* Form Actions */
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1rem;
+      grid-column: 1 / -1;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+    }
+
+    .btn-secondary {
+      background: #f8f9fa;
+      color: var(--text-dark);
+    }
+
+    .btn-secondary:hover {
+      background: #e9ecef;
+      transform: translateY(-2px);
+    }
+
+    /* Availability Schedule */
+    .availability-schedule {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .availability-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .availability-days {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .availability-day {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .day-name {
+      font-weight: 500;
+    }
+
+    .time-slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .time-slot {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .time-slot-remove {
+      color: var(--secondary-red);
+      cursor: pointer;
+    }
+
+    .add-slot-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .add-slot-form input {
+      flex: 1;
+      max-width: 100px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .counselor-dashboard {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: static;
+      }
+
+      .profile-card {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-form {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hdr {
+        padding: 0 1rem;
+      }
+
+      .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-nav a {
+        white-space: nowrap;
+      }
+
+      .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .profile-stats {
+        flex-wrap: wrap;
+      }
+
+      .availability-day {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hdr">
+      <div class="hdr-logo"><h2>CalmConnect</h2></div>
+      <div class="hdr-btns">
+        <div class="prfl-bell" aria-label="Notifications">
+          <i class="bx bxs-bell"></i>
+        </div>
+        <div class="prfl-name"><h4>Dr. Sarah Martinez</h4></div>
+        <div class="prfl-container">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=40&h=40&fit=crop&crop=face" alt="Profile picture of Dr. Sarah Martinez" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="counselor-dashboard">
+    <aside class="sidebar" aria-label="Counselor navigation">
+      <div class="sidebar-logo"><h3>Counselor Panel</h3></div>
+      <nav class="sidebar-nav">
+        <a href="counselor-panel.html"><i class="bx bxs-dashboard"></i> Dashboard</a>
+        <a href="counselor-schedule.html"><i class="bx bxs-calendar"></i> Schedule</a>
+        <a href="counselor-reports.html"><i class="bx bxs-report"></i> Reports</a>
+        <a href="counselor-archive.html"><i class="bx bxs-archive"></i> Archive</a>
+        <a href="counselor-profile.html" class="active" aria-current="page"><i class="bx bxs-user-circle"></i> Profile</a>
+      </nav>
+    </aside>
+
+    <main class="profile-main">
+      <div class="profile-header">
+        <div>
+          <h2>My Profile</h2>
+          <p>Manage your personal information and professional details</p>
+        </div>
+        <button class="btn btn-primary" id="saveProfileBtn">
+          <i class="bx bxs-save"></i> Save Changes
+        </button>
+      </div>
+
+      <div class="profile-section">
+        <h3>Personal Information</h3>
+        <div class="profile-card">
+          <div class="profile-picture">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face" alt="Profile picture of Dr. Sarah Martinez" />
+            <div class="profile-picture-edit">
+              <i class="bx bxs-camera"></i> Change
+            </div>
+          </div>
+          <div class="profile-info">
+            <h4>Dr. Sarah Martinez</h4>
+            <p>Licensed Clinical Psychologist</p>
+            <div class="profile-stats">
+              <div class="stat-item">
+                <div class="stat-number">142</div>
+                <div class="stat-label">Sessions</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">4.9</div>
+                <div class="stat-label">Rating</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Years</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="profile-form">
+        <div class="profile-section">
+          <h3>Basic Information</h3>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" value="Sarah" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" value="Martinez" required>
+          </div>
+          <div class="form-group">
+            <label for="title">Professional Title</label>
+            <input type="text" id="title" value="Licensed Clinical Psychologist" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" value="s.martinez@university.edu" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" value="(555) 123-4567">
+          </div>
+          <div class="form-group">
+            <label for="department">Department</label>
+            <input type="text" id="department" value="Student Counseling Services">
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h3>Professional Details</h3>
+          <div class="form-group">
+            <label for="licenseNumber">License Number</label>
+            <input type="text" id="licenseNumber" value="PSY123456" required>
+          </div>
+          <div class="form-group">
+            <label for="licenseState">Licensing State</label>
+            <input type="text" id="licenseState" value="California" required>
+          </div>
+          <div class="form-group">
+            <label for="yearsExperience">Years of Experience</label>
+            <input type="number" id="yearsExperience" value="5" min="0" required>
+          </div>
+          <div class="form-group full-width">
+            <label for="specializations">Specializations</label>
+            <div class="specialization-tags">
+              <span class="tag">
+                Anxiety Disorders
+                <span class="tag-remove"><i class="bx bx-x"></i></span>
+              </span>
+              <span class="tag">
+                Cognitive Behavioral Therapy
+                <span class="tag-remove"><i class="bx bx-x"></i></span>
+              </span>
+              <span class="tag">
+                Stress Management
+                <span class="tag-remove"><i class="bx bx-x"></i></span>
+              </span>
+            </div>
+            <div class="tag-input-container">
+              <input type="text" id="newSpecialization" placeholder="Add new specialization">
+              <button type="button" class="btn btn-secondary" id="addSpecializationBtn">Add</button>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="bio">Professional Bio</label>
+            <textarea id="bio">Dr. Martinez specializes in cognitive behavioral therapy for anxiety and stress-related disorders. With 5 years of experience in university counseling settings, she focuses on helping students develop coping strategies for academic and personal challenges. She holds a PhD in Clinical Psychology from Stanford University.</textarea>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h3>Availability Settings</h3>
+          <div class="availability-schedule">
+            <div class="availability-header">
+              <h4>Weekly Availability</h4>
+              <button type="button" class="btn btn-secondary">Set Default Hours</button>
+            </div>
+            <div class="availability-days">
+              <div class="availability-day">
+                <div class="day-name">Monday</div>
+                <div class="time-slots">
+                  <span class="time-slot">
+                    9:00 AM - 12:00 PM
+                    <span class="time-slot-remove"><i class="bx bx-x"></i></span>
+                  </span>
+                  <span class="time-slot">
+                    1:00 PM - 5:00 PM
+                    <span class="time-slot-remove"><i class="bx bx-x"></i></span>
+                  </span>
+                </div>
+              </div>
+              <div class="availability-day">
+                <div class="day-name">Tuesday</div>
+                <div class="time-slots">
+                  <span class="time-slot">
+                    10:00 AM - 2:00 PM
+                    <span class="time-slot-remove"><i class="bx bx-x"></i></span>
+                  </span>
+                  <span class="time-slot">
+                    3:00 PM - 6:00 PM
+                    <span class="time-slot-remove"><i class="bx bx-x"></i></span>
+                  </span>
+                </div>
+              </div>
+              <div class="availability-day">
+                <div class="day-name">Wednesday</div>
+                <div class="time-slots">
+                  <span class="time-slot">
+                    9:00 AM - 12:00 PM
+                    <span class="time-slot-remove"><i class="bx bx-x"></i></span>
+                  </span>
+                </div>
+              </div>
+              <div class="availability-day">
+                <div class="day-name">Thursday</div>
+                <div class="time-slots">
+                  <span class="time-slot">
+                    1:00 PM - 5:00 PM
+                    <span class="time-slot-remove"><i class="bx bx-x"></i></span>
+                  </span>
+                </div>
+              </div>
+              <div class="availability-day">
+                <div class="day-name">Friday</div>
+                <div class="time-slots">
+                  <span class="time-slot">
+                    9:00 AM - 12:00 PM
+                    <span class="time-slot-remove"><i class="bx bx-x"></i></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="add-slot-form">
+              <select>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+              </select>
+              <input type="time" placeholder="Start time">
+              <input type="time" placeholder="End time">
+              <button type="button" class="btn btn-secondary">Add Slot</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add specialization
+      document.getElementById('addSpecializationBtn').addEventListener('click', function() {
+        const input = document.getElementById('newSpecialization');
+        const value = input.value.trim();
+        
+        if (value) {
+          const tagsContainer = document.querySelector('.specialization-tags');
+          const newTag = document.createElement('span');
+          newTag.className = 'tag';
+          newTag.innerHTML = `
+            ${value}
+            <span class="tag-remove"><i class="bx bx-x"></i></span>
+          `;
+          tagsContainer.appendChild(newTag);
+          input.value = '';
+          
+          // Add remove functionality
+          newTag.querySelector('.tag-remove').addEventListener('click', function() {
+            newTag.remove();
+          });
+        }
+      });
+
+      // Remove time slot
+      document.querySelectorAll('.time-slot-remove').forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (confirm('Remove this time slot?')) {
+            this.parentElement.remove();
+          }
+        });
+      });
+
+      // Save profile
+      document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Profile updated successfully!');
+      });
+
+      // Change profile picture
+      document.querySelector('.profile-picture-edit').addEventListener('click', function() {
+        alert('In a real implementation, this would open a file picker to upload a new profile picture');
+      });
+
+      // Notification bell functionality
+      document.querySelector('.prfl-bell').addEventListener('click', function() {
+        alert('You have 2 new notifications');
+      });
+    });
+  </script>
+</body>
+</html>

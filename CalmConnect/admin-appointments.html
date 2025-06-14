@@ -5,24 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Appointments | CalmConnect</title>
 
-  <link rel="stylesheet" href="css/index.css" />
-  <link rel="stylesheet" href="css/admin-calendar.css" />
-  <link rel="stylesheet" href="css/sidebar.css" />
-  <link rel="stylesheet" href="css/profile-dropdown.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/admin-calendar.css" />
   <link rel="icon" type="image/x-icon" href="img/favicon.png" />
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin-calendar.css">
+  <link rel="stylesheet" href="css/profile-dropdown.css">
+  <link rel="stylesheet" href="css/dropdown.css">
   <link rel="stylesheet" href="css/admin-calendar-modal.css">
-  
+  <style>
+    /* Add any additional styles here */
+  </style>
 </head>
 
 <body>
   <header>
     <div class="hdr">
       <div class="hdr-logo">
-        <a href="#"><h2>CalmConnect</h2></a>
+        <h2>CalmConnect</h2>
       </div>
       <div class="hdr-btns">
         <div class="prfl-bell dropdown">
@@ -35,7 +34,7 @@
           <h4>Username</h4>
         </div>
         <div class="prfl-container dropdown">
-          <img src="img/default.jpg" alt="Profile Picture" id="profile-img" />
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Profile Picture" id="profile-img" />
           <div class="dropdown-menu" id="profile-dropdown">
             <a href="#">Settings</a>
             <a href="login.html">Log out</a>
@@ -52,62 +51,403 @@
         <h3>Admin Panel</h3>
       </div>
       <nav class="sidebar-nav">
-  <a href="admin-panel.html"><i class="bx bxs-home"></i> Dashboard</a>
-  <a href="admin-data.html"><i class="bx bxs-data"></i> Data</a>
-  <a href="admin-appointments.html" class="active"><i class='bx bxs-calendar-week'></i> Appointments</a>
-  <a href="admin-archive.html"><i class="bx bxs-archive"></i> Archives</a>
-          <a href="admin-personnel.html"><i class="bx bxs-user-badge"></i> Personnel</a>
-
-</nav>
+        <a href="admin-panel.html"><i class="bx bxs-home"></i> Dashboard</a>
+        <a href="admin-data.html"><i class="bx bxs-data"></i> Data</a>
+        <a href="admin-appointments.html" class="active"><i class='bx bxs-calendar-week'></i> Appointments</a>
+        <a href="admin-archive.html"><i class="bx bxs-archive"></i> Archives</a>
+        <a href="admin-personnel.html"><i class="bx bxs-user-badge"></i> Personnel</a>
+      </nav>
     </aside>
 
     <main class="appointment-main">
       <div class="appointment-header">
         <h2>Scheduled Appointments</h2>
+        <p>Manage and view all upcoming counseling sessions</p>
       </div>
-      <div id="admin-calendar"></div>
+      
+      <div class="calendar-container">
+        <div id="admin-calendar"></div>
+      </div>
     </main>
   </div>
+
+  <!-- Modal -->
   <div id="appointmentModal" class="modal">
-  <div class="modal-content">
-<span class="close-btn" onclick="closeModal()">&times;</span>
-    <h3>Edit Appointment</h3>
-    <form id="editAppointmentForm">
-      <label for="studentId">Student ID</label>
-      <input type="text" id="studentId" name="studentId" required>
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h3>Edit Appointment</h3>
+      <form id="editAppointmentForm">
+        <label for="studentId">Student ID</label>
+        <input type="text" id="studentId" name="studentId" required>
 
-      <label for="studentName">Name</label>
-      <input type="text" id="studentName" name="studentName" required>
+        <label for="studentName">Name</label>
+        <input type="text" id="studentName" name="studentName" required>
 
-      <label for="college">College</label>
-      <input type="text" id="college" name="college" required>
+        <label for="college">College</label>
+        <input type="text" id="college" name="college" required>
 
-      <label for="program">Program</label>
-      <input type="text" id="program" name="program" required>
+        <label for="program">Program</label>
+        <input type="text" id="program" name="program" required>
 
-      <label for="counselor">Guidance Counselor</label>
-      <input type="text" id="counselor" name="counselor" required>
+        <label for="counselor">Guidance Counselor</label>
+        <input type="text" id="counselor" name="counselor" required>
 
-      <label for="reason">Reason for Visit</label>
-      <textarea id="reason" name="reason" rows="3" required></textarea>
+        <label for="reason">Reason for Visit</label>
+        <textarea id="reason" name="reason" rows="3" required></textarea>
 
-      <label for="date">Date</label>
-      <input type="date" id="date" name="date" required>
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
 
-      <label for="time">Time</label>
-      <input type="time" id="time" name="time" required>
+        <label for="time">Time</label>
+        <input type="time" id="time" name="time" required>
 
-      <div class="modal-actions">
-        <button type="submit">Save Changes</button>
-        <button type="button" class="archive-btn" onclick="archiveAppointment()">Archive</button>
-<button type="button" onclick="closeModal()">Cancel</button>
-      </div>
-    </form>
+        <div class="modal-actions">
+          <button type="submit">Save Changes</button>
+          <button type="button" class="archive-btn" onclick="archiveAppointment()">Archive</button>
+          <button type="button" onclick="closeModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-  <script src="js/bell.js"></script>
-  <script src="js/dropdown.js"></script>
-  <script src="js/appointment-scheduling.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script>
+    // Archive Manager Class
+    class ArchiveManager {
+      constructor() {
+        this.activeRecords = {
+          appointments: [
+            {
+              id: 'apt-001',
+              student: 'Sarah Johnson',
+              studentId: 'STU-2021-0145',
+              college: 'College of Liberal Arts',
+              program: 'Psychology (BS)',
+              date: '2025-06-05',
+              time: '2:00 PM',
+              counselor: 'Dr. Maria Santos',
+              reason: 'Anxiety management and coping strategies for exam periods',
+              status: 'active'
+            },
+            {
+              id: 'apt-002',
+              student: 'Mike Chen',
+              studentId: 'STU-2022-0298',
+              college: 'College of Engineering',
+              program: 'Computer Science (BS)',
+              date: '2025-06-06',
+              time: '10:30 AM',
+              counselor: 'Prof. John Martinez',
+              reason: 'Academic pressure and time management issues',
+              status: 'active'
+            },
+            {
+              id: 'apt-003',
+              student: 'Emma Wilson',
+              studentId: 'STU-2020-0087',
+              college: 'College of Arts and Sciences',
+              program: 'English Literature (BA)',
+              date: '2025-06-07',
+              time: '9:00 AM',
+              counselor: 'Dr. Patricia Lee',
+              reason: 'Depression counseling and mental health support',
+              status: 'active'
+            },
+            {
+              id: 'apt-004',
+              student: 'James Rodriguez',
+              studentId: 'STU-2023-0156',
+              college: 'College of Business',
+              program: 'Business Administration (BS)',
+              date: '2025-06-08',
+              time: '3:30 PM',
+              counselor: 'Dr. Lisa Wong',
+              reason: 'Career guidance and academic planning',
+              status: 'active'
+            },
+            {
+              id: 'apt-005',
+              student: 'Anna Kim',
+              studentId: 'STU-2022-0089',
+              college: 'College of Health Sciences',
+              program: 'Nursing (BSN)',
+              date: '2025-06-10',
+              time: '11:00 AM',
+              counselor: 'Prof. Robert Davis',
+              reason: 'Stress management and work-life balance',
+              status: 'active'
+            }
+          ]
+        };
+
+        this.archivedRecords = {
+          appointments: []
+        };
+      }
+
+      // Archive a record by moving it from active to archived
+      archiveRecord(type, recordId) {
+        console.log(`Attempting to archive ${type} record: ${recordId}`);
+        
+        const activeRecords = this.activeRecords[type];
+        const recordIndex = activeRecords.findIndex(record => record.id === recordId);
+        
+        if (recordIndex !== -1) {
+          const recordToArchive = { ...activeRecords[recordIndex] };
+          recordToArchive.status = 'archived';
+          recordToArchive.archivedDate = new Date().toISOString().split('T')[0];
+          
+          // Move to archived records
+          this.archivedRecords[type].push(recordToArchive);
+          
+          // Remove from active records
+          this.activeRecords[type].splice(recordIndex, 1);
+          
+          // Show confirmation
+          this.showNotification(`${this.capitalizeFirst(type.slice(0, -1))} archived successfully!`, 'success');
+          
+          // Refresh calendar
+          this.refreshCalendar();
+          
+          console.log(`Successfully archived ${type} record: ${recordId}`);
+          return true;
+        } else {
+          console.log(`Record not found: ${recordId}`);
+          this.showNotification(`Record not found: ${recordId}`, 'error');
+        }
+        
+        return false;
+      }
+
+      // Helper function to capitalize first letter
+      capitalizeFirst(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
+
+      // Show notification
+      showNotification(message, type = 'info') {
+        // Remove existing notifications
+        document.querySelectorAll('.notification').forEach(notif => notif.remove());
+        
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+          <div class="notification-content">
+            <span class="notification-message">${message}</span>
+            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+          </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+          if (notification.parentElement) {
+            notification.remove();
+          }
+        }, 5000);
+      }
+
+      // Refresh calendar
+      refreshCalendar() {
+        if (window.calendar) {
+          console.log('Refreshing calendar...');
+          
+          // Helper function to convert 12-hour time to 24-hour format
+          const convertTo24Hour = (time12h) => {
+            if (!time12h) return '00:00:00';
+            const [time, modifier] = time12h.split(' ');
+            let [hours, minutes] = time.split(':');
+            
+            if (hours === '12') hours = '00';
+            if (modifier === 'PM') hours = parseInt(hours, 10) + 12;
+            
+            return `${hours}:${minutes}:00`;
+          };
+
+          // Update calendar events
+          const calendarEvents = this.activeRecords.appointments.map(apt => ({
+            id: apt.id,
+            title: `${apt.student} - ${apt.reason}`,
+            start: `${apt.date}T${convertTo24Hour(apt.time)}`,
+            extendedProps: {
+              appointmentId: apt.id, // Store the appointment ID
+              studentId: apt.studentId,
+              studentName: apt.student,
+              college: apt.college,
+              program: apt.program,
+              counselor: apt.counselor,
+              reason: apt.reason
+            }
+          }));
+
+          // Remove all existing events and add new ones
+          window.calendar.removeAllEvents();
+          window.calendar.addEventSource(calendarEvents);
+          
+          console.log(`Calendar refreshed with ${calendarEvents.length} events`);
+        }
+      }
+    }
+
+    // Global variables
+    let calendar;
+    let archiveManager;
+    let currentAppointmentId = null; // Store the current appointment ID globally
+
+    // Initialize everything when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize archive manager
+      archiveManager = new ArchiveManager();
+      window.archiveManager = archiveManager;
+
+      // Initialize calendar
+      var calendarEl = document.getElementById('admin-calendar');
+      calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: archiveManager.activeRecords.appointments.map(apt => ({
+          id: apt.id,
+          title: `${apt.student} - ${apt.reason}`,
+          start: `${apt.date}T${convertTo24Hour(apt.time)}`,
+          extendedProps: {
+            appointmentId: apt.id, // This is the key fix
+            studentId: apt.studentId,
+            studentName: apt.student,
+            college: apt.college,
+            program: apt.program,
+            counselor: apt.counselor,
+            reason: apt.reason
+          }
+        })),
+        eventClick: function(info) {
+          console.log('Event clicked:', info.event.id);
+          openModal(info.event);
+        },
+        height: 'auto'
+      });
+      
+      window.calendar = calendar;
+      calendar.render();
+    });
+
+    // Helper function to convert 12-hour time to 24-hour format
+    function convertTo24Hour(time12h) {
+      if (!time12h) return '00:00:00';
+      const [time, modifier] = time12h.split(' ');
+      let [hours, minutes] = time.split(':');
+      
+      if (hours === '12') hours = '00';
+      if (modifier === 'PM') hours = parseInt(hours, 10) + 12;
+      
+      return `${hours}:${minutes}:00`;
+    }
+
+    // Dropdown functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('bell-icon').addEventListener('click', function(e) {
+        e.stopPropagation();
+        const dropdown = document.getElementById('bell-dropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      });
+
+      document.getElementById('profile-img').addEventListener('click', function(e) {
+        e.stopPropagation();
+        const dropdown = document.getElementById('profile-dropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      });
+
+      document.addEventListener('click', function() {
+        document.getElementById('bell-dropdown').style.display = 'none';
+        document.getElementById('profile-dropdown').style.display = 'none';
+      });
+    });
+
+    // Modal functions - FIXED VERSION
+    function openModal(event) {
+      console.log('Opening modal for event:', event.id, event);
+      
+      // Store the appointment ID globally - this is the key fix
+      currentAppointmentId = event.id;
+      console.log('Stored currentAppointmentId:', currentAppointmentId);
+      
+      document.getElementById('appointmentModal').style.display = 'block';
+      
+      // Get the extended properties from the event
+      const extendedProps = event.extendedProps;
+      
+      // Split the title into name and reason
+      const titleParts = event.title.split(' - ');
+      const name = titleParts[0] || '';
+      const reason = titleParts.slice(1).join(' - ') || '';
+      
+      // Format the date and time
+      const startDate = event.start;
+      const formattedDate = startDate.toISOString().split('T')[0];
+      const formattedTime = startDate.toTimeString().split(' ')[0].substring(0, 5);
+      
+      // Populate all form fields
+      document.getElementById('studentId').value = extendedProps.studentId || '';
+      document.getElementById('studentName').value = name;
+      document.getElementById('college').value = extendedProps.college || '';
+      document.getElementById('program').value = extendedProps.program || '';
+      document.getElementById('counselor').value = extendedProps.counselor || '';
+      document.getElementById('reason').value = reason;
+      document.getElementById('date').value = formattedDate;
+      document.getElementById('time').value = formattedTime;
+    }
+
+    function closeModal() {
+      document.getElementById('appointmentModal').style.display = 'none';
+      currentAppointmentId = null; // Clear the stored ID
+    }
+
+    // Archive function - FIXED VERSION
+    function archiveAppointment() {
+      console.log('Trying to archive appointment ID:', currentAppointmentId);
+      
+      if (!currentAppointmentId) {
+        alert('Error: No appointment selected. Please close and reopen the modal.');
+        console.error('currentAppointmentId is null or undefined');
+        return;
+      }
+      
+      if (!archiveManager) {
+        alert('Error: Archive manager not available. Please refresh the page.');
+        console.error('Archive manager not available');
+        return;
+      }
+      
+      // Confirm before archiving
+      if (confirm('Are you sure you want to archive this appointment?')) {
+        console.log('Archiving appointment with ID:', currentAppointmentId);
+        const success = archiveManager.archiveRecord('appointments', currentAppointmentId);
+        if (success) {
+          closeModal();
+        }
+      }
+    }
+
+    // Form submission
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('editAppointmentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Appointment updated successfully!');
+        closeModal();
+      });
+    });
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('appointmentModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
 </body>
 </html>

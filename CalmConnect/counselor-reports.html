@@ -1,0 +1,1239 @@
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports | CalmConnect</title>
+  <meta name="description" content="Comprehensive reports dashboard for counselors to manage patient assessments and session reports">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary-color: #2ecc71;
+      --primary-dark: #27ae60;
+      --secondary-blue: #3498db;
+      --secondary-blue-dark: #2980b9;
+      --secondary-purple: #9b59b6;
+      --secondary-purple-dark: #8e44ad;
+      --secondary-orange: #e67e22;
+      --secondary-orange-dark: #d35400;
+      --secondary-red: #e74c3c;
+      --secondary-red-dark: #c0392b;
+      --text-dark: #2c3e50;
+      --text-medium: #666;
+      --text-light: #999;
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --bg-light: #f8f9fa;
+      --border-light: #e9ecef;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hdr-logo h2 {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .hdr-btns {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .prfl-bell {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .prfl-bell i {
+      font-size: 1.3rem;
+      color: var(--text-medium);
+      transition: color 0.3s ease;
+    }
+
+    .prfl-bell:hover i {
+      color: var(--primary-color);
+    }
+
+    .prfl-name h4 {
+      color: #333;
+      font-weight: 600;
+    }
+
+    .prfl-container img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid var(--primary-color);
+      object-fit: cover;
+    }
+
+    /* Dashboard Layout */
+    .reports-dashboard {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 2rem;
+      padding: 2rem;
+      min-height: calc(100vh - 120px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-logo h3 {
+      color: var(--primary-color);
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text-medium);
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      transform: translateX(5px);
+      box-shadow: 0 2px 10px rgba(46, 204, 113, 0.3);
+    }
+
+    .sidebar-nav a i {
+      font-size: 1.2rem;
+    }
+
+    /* Main Content */
+    .reports-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .page-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .page-title h1 {
+      color: var(--text-dark);
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .page-title i {
+      font-size: 2.5rem;
+      color: var(--secondary-blue);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--bg-light);
+      color: var(--text-medium);
+      border: 1px solid var(--border-light);
+    }
+
+    .btn-secondary:hover {
+      background: #e9ecef;
+      color: var(--text-dark);
+    }
+
+    /* Statistics Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .stat-card.blue::before {
+      background: linear-gradient(90deg, var(--secondary-blue), var(--secondary-blue-dark));
+    }
+
+    .stat-card.purple::before {
+      background: linear-gradient(90deg, var(--secondary-purple), var(--secondary-purple-dark));
+    }
+
+    .stat-card.orange::before {
+      background: linear-gradient(90deg, var(--secondary-orange), var(--secondary-orange-dark));
+    }
+
+    .stat-card.red::before {
+      background: linear-gradient(90deg, var(--secondary-red), var(--secondary-red-dark));
+    }
+
+    .stat-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .stat-card.blue .stat-icon { color: var(--secondary-blue); }
+    .stat-card.purple .stat-icon { color: var(--secondary-purple); }
+    .stat-card.orange .stat-icon { color: var(--secondary-orange); }
+    .stat-card.red .stat-icon { color: var(--secondary-red); }
+
+    .stat-card h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-medium);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .stat-card .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .stat-change {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .stat-change.positive {
+      color: var(--primary-color);
+    }
+
+    .stat-change.negative {
+      color: var(--secondary-red);
+    }
+
+    /* Filters Section */
+    .filters-section {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .filters-header {
+      display: flex;
+      justify-content: between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .filters-header h3 {
+      color: var(--text-dark);
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .filters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .filter-group label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-medium);
+    }
+
+    .filter-input {
+      padding: 0.75rem;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .filter-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    /* Reports Table */
+    .reports-table-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .table-header {
+      padding: 2rem;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .table-header h3 {
+      color: var(--text-dark);
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      width: 250px;
+      font-size: 0.9rem;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+    }
+
+    .reports-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .reports-table thead {
+      background: var(--bg-light);
+    }
+
+    .reports-table th {
+      padding: 1.2rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .reports-table td {
+      padding: 1.2rem;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+    }
+
+    .reports-table tbody tr {
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .reports-table tbody tr:hover {
+      background: rgba(52, 152, 219, 0.05);
+    }
+
+    .report-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .report-type.assessment {
+      background: rgba(52, 152, 219, 0.1);
+      color: var(--secondary-blue);
+    }
+
+    .report-type.session {
+      background: rgba(155, 89, 182, 0.1);
+      color: var(--secondary-purple);
+    }
+
+    .report-type.urgent {
+      background: rgba(231, 76, 60, 0.1);
+      color: var(--secondary-red);
+    }
+
+    .report-type.progress {
+      background: rgba(46, 204, 113, 0.1);
+      color: var(--primary-color);
+    }
+
+    .priority-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .priority-high {
+      background: rgba(231, 76, 60, 0.1);
+      color: var(--secondary-red);
+    }
+
+    .priority-medium {
+      background: rgba(230, 126, 34, 0.1);
+      color: var(--secondary-orange);
+    }
+
+    .priority-low {
+      background: rgba(46, 204, 113, 0.1);
+      color: var(--primary-color);
+    }
+
+    .status-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-completed {
+      background: rgba(46, 204, 113, 0.1);
+      color: var(--primary-color);
+    }
+
+    .status-pending {
+      background: rgba(230, 126, 34, 0.1);
+      color: var(--secondary-orange);
+    }
+
+    .status-draft {
+      background: rgba(149, 165, 166, 0.1);
+      color: #7f8c8d;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .action-btn.view {
+      background: rgba(52, 152, 219, 0.1);
+      color: var(--secondary-blue);
+    }
+
+    .action-btn.edit {
+      background: rgba(230, 126, 34, 0.1);
+      color: var(--secondary-orange);
+    }
+
+    .action-btn.delete {
+      background: rgba(231, 76, 60, 0.1);
+      color: var(--secondary-red);
+    }
+
+    .action-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Pagination */
+    .pagination {
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .pagination-info {
+      color: var(--text-medium);
+      font-size: 0.9rem;
+    }
+
+    .pagination-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .pagination-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border-light);
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      color: var(--text-medium);
+    }
+
+    .pagination-btn:hover:not(.active) {
+      background: var(--bg-light);
+    }
+
+    .pagination-btn.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .modal-header h2 {
+      color: var(--text-dark);
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .close-modal:hover {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .modal-body {
+      color: var(--text-medium);
+      line-height: 1.6;
+    }
+
+    .report-detail {
+      margin-bottom: 1.5rem;
+    }
+
+    .report-detail h4 {
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .report-detail p {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .reports-dashboard {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: static;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .filters-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-nav a {
+        white-space: nowrap;
+      }
+
+      .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .search-box input {
+        width: 100%;
+      }
+
+      .reports-table-container {
+        overflow-x: auto;
+      }
+
+      .reports-table {
+        min-width: 800px;
+      }
+
+      .modal-content {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hdr">
+      <div class="hdr-logo"><h2>CalmConnect</h2></div>
+      <div class="hdr-btns">
+        <div class="prfl-bell" aria-label="Notifications">
+          <i class="bx bxs-bell"></i>
+        </div>
+        <div class="prfl-name"><h4>Dr. Sarah Martinez</h4></div>
+        <div class="prfl-container">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=40&h=40&fit=crop&crop=face" alt="Profile picture of Dr. Sarah Martinez" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="reports-dashboard">
+    <aside class="sidebar" aria-label="Counselor navigation">
+      <div class="sidebar-logo"><h3>Counselor Panel</h3></div>
+      <nav class="sidebar-nav">
+        <a href="counselor-panel.html"><i class="bx bxs-dashboard"></i> Dashboard</a>
+        <a href="counselor-schedule.html"><i class="bx bxs-calendar"></i> Schedule</a>
+        <a href="#" class="active" aria-current="page"><i class="bx bxs-report"></i> Reports</a>
+        <a href="counselor-archive.html"><i class="bx bxs-archive"></i> Archive</a>
+        <a href="counselor-profile.html"><i class="bx bxs-user-circle"></i> Profile</a>
+      </nav>
+    </aside>
+
+    <main class="reports-content">
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="page-title">
+          <i class="bx bxs-report"></i>
+          <h1>Reports Dashboard</h1>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-primary" id="createReportBtn">
+            <i class="bx bxs-plus"></i>
+            Create New Report
+          </button>
+          <button class="btn btn-secondary" id="exportReportsBtn">
+            <i class="bx bxs-download"></i>
+            Export Reports
+          </button>
+        </div>
+      </section>
+
+      <!-- Statistics Cards -->
+      <section class="stats-grid" aria-label="Reports statistics">
+        <div class="stat-card blue">
+          <div class="stat-icon">
+            <i class="bx bxs-file-doc"></i>
+          </div>
+          <h3>Total Reports</h3>
+          <div class="stat-number">247</div>
+          <div class="stat-change positive">+12 this week</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-icon">
+            <i class="bx bxs-time-five"></i>
+          </div>
+          <h3>Pending Reviews</h3>
+          <div class="stat-number">18</div>
+          <div class="stat-change negative">+3 from yesterday</div>
+        </div>
+        <div class="stat-card orange">
+          <div class="stat-icon">
+            <i class="bx bxs-analyse"></i>
+          </div>
+          <h3>Completed This Month</h3>
+          <div class="stat-number">52</div>
+          <div class="stat-change positive">+8% from last month</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-icon">
+            <i class="bx bxs-error-alt"></i>
+          </div>
+          <h3>Urgent Cases</h3>
+          <div class="stat-number">5</div>
+          <div class="stat-change">Requires attention</div>
+        </div>
+      </section>
+
+      <!-- Filters Section -->
+      <section class="filters-section">
+        <div class="filters-header">
+          <h3><i class="bx bxs-filter-alt"></i> Filter Reports</h3>
+        </div>
+        <div class="filters-grid">
+          <div class="filter-group">
+            <label for="reportType">Report Type</label>
+            <select id="reportType" class="filter-input">
+              <option value="">All Types</option>
+              <option value="assessment">Assessment</option>
+              <option value="session">Session Notes</option>
+              <option value="progress">Progress Report</option>
+              <option value="urgent">Urgent Report</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="dateRange">Date Range</label>
+            <select id="dateRange" class="filter-input">
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+              <option value="quarter">This Quarter</option>
+              <option value="custom">Custom Range</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="priority">Priority Level</label>
+            <select id="priority" class="filter-input">
+              <option value="">All Priorities</option>
+              <option value="high">High Priority</option>
+              <option value="medium">Medium Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="status">Status</label>
+            <select id="status" class="filter-input">
+              <option value="">All Statuses</option>
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+              <option value="draft">Draft</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button class="btn btn-primary" id="applyFilters">
+            <i class="bx bxs-search"></i>
+            Apply Filters
+          </button>
+          <button class="btn btn-secondary" id="clearFilters">
+            <i class="bx bxs-x"></i>
+            Clear All
+          </button>
+        </div>
+      </section>
+
+      <!-- Reports Table -->
+      <section class="reports-table-container">
+        <div class="table-header">
+          <h3><i class="bx bxs-data"></i> All Reports</h3>
+          <div class="table-actions">
+            <div class="search-box">
+              <i class="bx bx-search"></i>
+              <input type="text" placeholder="Search reports..." id="searchReports">
+            </div>
+          </div>
+        </div>
+        
+        <table class="reports-table">
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Report Type</th>
+              <th>Date Created</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Last Modified</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Alex Johnson</td>
+              <td><span class="report-type assessment"><i class="bx bxs-file-plus"></i> Assessment</span></td>
+              <td>May 15, 2023</td>
+              <td><span class="priority-badge priority-high">High</span></td>
+              <td><span class="status-badge status-completed">Completed</span></td>
+              <td>May 16, 2023</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn view"><i class="bx bxs-show"></i></button>
+                  <button class="action-btn edit"><i class="bx bxs-edit"></i></button>
+                  <button class="action-btn delete"><i class="bx bxs-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Maria Santos</td>
+              <td><span class="report-type session"><i class="bx bxs-conversation"></i> Session Notes</span></td>
+              <td>May 18, 2023</td>
+              <td><span class="priority-badge priority-medium">Medium</span></td>
+              <td><span class="status-badge status-pending">Pending</span></td>
+              <td>May 18, 2023</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn view"><i class="bx bxs-show"></i></button>
+                  <button class="action-btn edit"><i class="bx bxs-edit"></i></button>
+                  <button class="action-btn delete"><i class="bx bxs-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>David Kim</td>
+              <td><span class="report-type progress"><i class="bx bxs-analyse"></i> Progress Report</span></td>
+              <td>May 20, 2023</td>
+              <td><span class="priority-badge priority-low">Low</span></td>
+              <td><span class="status-badge status-completed">Completed</span></td>
+              <td>May 22, 2023</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn view"><i class="bx bxs-show"></i></button>
+                  <button class="action-btn edit"><i class="bx bxs-edit"></i></button>
+                  <button class="action-btn delete"><i class="bx bxs-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Lisa Chang</td>
+              <td><span class="report-type urgent"><i class="bx bxs-error-alt"></i> Urgent Report</span></td>
+              <td>May 21, 2023</td>
+              <td><span class="priority-badge priority-high">High</span></td>
+              <td><span class="status-badge status-pending">Pending</span></td>
+              <td>May 21, 2023</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn view"><i class="bx bxs-show"></i></button>
+                  <button class="action-btn edit"><i class="bx bxs-edit"></i></button>
+                  <button class="action-btn delete"><i class="bx bxs-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Michael Torres</td>
+              <td><span class="report-type assessment"><i class="bx bxs-file-plus"></i> Assessment</span></td>
+              <td>May 22, 2023</td>
+              <td><span class="priority-badge priority-medium">Medium</span></td>
+              <td><span class="status-badge status-draft">Draft</span></td>
+              <td>May 23, 2023</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn view"><i class="bx bxs-show"></i></button>
+                  <button class="action-btn edit"><i class="bx bxs-edit"></i></button>
+                  <button class="action-btn delete"><i class="bx bxs-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Student #4521</td>
+              <td><span class="report-type urgent"><i class="bx bxs-error-alt"></i> Urgent Report</span></td>
+              <td>May 24, 2023</td>
+              <td><span class="priority-badge priority-high">High</span></td>
+              <td><span class="status-badge status-completed">Completed</span></td>
+              <td>May 25, 2023</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn view"><i class="bx bxs-show"></i></button>
+                  <button class="action-btn edit"><i class="bx bxs-edit"></i></button>
+                  <button class="action-btn delete"><i class="bx bxs-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Sarah Wilson</td>
+              <td><span class="report-type session"><i class="bx bxs-conversation"></i> Session Notes</span></td>
+              <td>May 25, 2023</td>
+              <td><span class="priority-badge priority-low">Low</span></td>
+              <td><span class="status-badge status-completed">Completed</span></td>
+              <td>May 26, 2023</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn view"><i class="bx bxs-show"></i></button>
+                  <button class="action-btn edit"><i class="bx bxs-edit"></i></button>
+                  <button class="action-btn delete"><i class="bx bxs-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <div class="pagination-info">Showing 1 to 7 of 247 reports</div>
+          <div class="pagination-controls">
+            <button class="pagination-btn" disabled>
+              <i class="bx bxs-chevron-left"></i>
+            </button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">4</button>
+            <button class="pagination-btn">5</button>
+            <button class="pagination-btn">
+              <i class="bx bxs-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Report Details Modal -->
+  <div class="modal" id="reportModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Report Details</h2>
+        <button class="close-modal" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="report-detail">
+          <h4>Patient Information</h4>
+          <p><strong>Name:</strong> Alex Johnson</p>
+          <p><strong>Student ID:</strong> #4523</p>
+          <p><strong>Age:</strong> 22</p>
+          <p><strong>Gender:</strong> Male</p>
+        </div>
+        
+        <div class="report-detail">
+          <h4>Report Information</h4>
+          <p><strong>Type:</strong> <span class="report-type assessment">Assessment</span></p>
+          <p><strong>Priority:</strong> <span class="priority-badge priority-high">High</span></p>
+          <p><strong>Status:</strong> <span class="status-badge status-completed">Completed</span></p>
+          <p><strong>Date Created:</strong> May 15, 2023</p>
+          <p><strong>Last Modified:</strong> May 16, 2023</p>
+        </div>
+        
+        <div class="report-detail">
+          <h4>Assessment Results</h4>
+          <p><strong>DASS21 Scores:</strong></p>
+          <p>Depression: 18 (Moderate)</p>
+          <p>Anxiety: 14 (Moderate)</p>
+          <p>Stress: 22 (Severe)</p>
+        </div>
+        
+        <div class="report-detail">
+          <h4>Counselor Notes</h4>
+          <p>Patient presents with significant stress levels related to academic pressure and family expectations. Moderate depression and anxiety symptoms were also noted. Recommended weekly counseling sessions and stress management techniques. Patient was receptive to suggestions and agreed to follow-up appointment.</p>
+        </div>
+        
+        <div class="report-detail">
+          <h4>Recommendations</h4>
+          <p>1. Weekly cognitive behavioral therapy sessions</p>
+          <p>2. Mindfulness and relaxation exercises</p>
+          <p>3. Academic support referral</p>
+          <p>4. Follow-up assessment in 4 weeks</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Modal functionality
+    const reportModal = document.getElementById('reportModal');
+    const closeModal = document.getElementById('closeModal');
+    const viewButtons = document.querySelectorAll('.action-btn.view');
+    
+    // Open modal when view button is clicked
+    viewButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        reportModal.classList.add('active');
+      });
+    });
+    
+    // Close modal
+    closeModal.addEventListener('click', () => {
+      reportModal.classList.remove('active');
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === reportModal) {
+        reportModal.classList.remove('active');
+      }
+    });
+    
+    // Quick action buttons
+    document.getElementById('createReportBtn').addEventListener('click', () => {
+      alert('Create new report functionality would be implemented here');
+    });
+    
+    document.getElementById('exportReportsBtn').addEventListener('click', () => {
+      alert('Export reports functionality would be implemented here');
+    });
+    
+    // Filter functionality
+    document.getElementById('applyFilters').addEventListener('click', () => {
+      alert('Apply filters functionality would be implemented here');
+    });
+    
+    document.getElementById('clearFilters').addEventListener('click', () => {
+      alert('Clear filters functionality would be implemented here');
+    });
+    
+    // Search functionality
+    document.getElementById('searchReports').addEventListener('input', (e) => {
+      console.log('Searching for:', e.target.value);
+      // Actual search implementation would go here
+    });
+    
+    // Pagination functionality
+    document.querySelectorAll('.pagination-btn:not(:disabled)').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!btn.classList.contains('active')) {
+          document.querySelector('.pagination-btn.active').classList.remove('active');
+          btn.classList.add('active');
+          alert(`Loading page ${btn.textContent}`);
+        }
+      });
+    });
+    
+    // Table row click functionality
+    document.querySelectorAll('.reports-table tbody tr').forEach(row => {
+      row.addEventListener('click', (e) => {
+        // Don't open modal if clicking on action buttons
+        if (!e.target.closest('.action-buttons')) {
+          const patientName = row.cells[0].textContent;
+          alert(`Opening full details for ${patientName}'s report`);
+        }
+      });
+    });
+    
+    // Edit and delete button functionality
+    document.querySelectorAll('.action-btn.edit').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const patientName = btn.closest('tr').cells[0].textContent;
+        alert(`Editing report for ${patientName}`);
+      });
+    });
+    
+    document.querySelectorAll('.action-btn.delete').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const patientName = btn.closest('tr').cells[0].textContent;
+        if (confirm(`Are you sure you want to delete the report for ${patientName}?`)) {
+          alert(`Report for ${patientName} deleted`);
+        }
+      });
+    });
+    
+    // Notification bell
+    document.querySelector('.prfl-bell').addEventListener('click', () => {
+      alert('You have 3 pending reports to review');
+    });
+  </script>
+</body>
+</html>

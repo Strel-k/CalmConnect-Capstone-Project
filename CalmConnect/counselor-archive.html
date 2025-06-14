@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive | CalmConnect</title>
+  <meta name="description" content="Archive for counselors to view past sessions and reports">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
+  <style>
+    :root {
+      --primary-color: #2ecc71;
+      --primary-dark: #27ae60;
+      --secondary-blue: #3498db;
+      --secondary-blue-dark: #2980b9;
+      --secondary-purple: #9b59b6;
+      --secondary-purple-dark: #8e44ad;
+      --secondary-orange: #e67e22;
+      --secondary-orange-dark: #d35400;
+      --secondary-red: #e74c3c;
+      --secondary-red-dark: #c0392b;
+      --text-dark: #2c3e50;
+      --text-medium: #666;
+      --text-light: #999;
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hdr-logo h2 {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .hdr-btns {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .prfl-bell {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .prfl-bell i {
+      font-size: 1.3rem;
+      color: var(--text-medium);
+      transition: color 0.3s ease;
+    }
+
+    .prfl-bell:hover i {
+      color: var(--primary-color);
+    }
+
+    .prfl-name h4 {
+      color: #333;
+      font-weight: 600;
+    }
+
+    .prfl-container img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid var(--primary-color);
+      object-fit: cover;
+    }
+
+    /* Dashboard Layout */
+    .counselor-dashboard {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 2rem;
+      padding: 2rem;
+      min-height: calc(100vh - 120px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-logo h3 {
+      color: var(--primary-color);
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text-medium);
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      transform: translateX(5px);
+      box-shadow: 0 2px 10px rgba(46, 204, 113, 0.3);
+    }
+
+    .sidebar-nav a i {
+      font-size: 1.2rem;
+    }
+
+    /* Main Content */
+    .archive-main {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .archive-header {
+      margin-bottom: 2rem;
+    }
+
+    .archive-header h2 {
+      color: var(--text-dark);
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .archive-header p {
+      color: var(--text-medium);
+    }
+
+    /* Filter Controls */
+    .filter-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-medium);
+      font-weight: 500;
+    }
+
+    .filter-group select,
+    .filter-group input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .filter-group select:focus,
+    .filter-group input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+    }
+
+    /* Archive Tabs */
+    .archive-tabs {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-btn {
+      padding: 0.8rem 1.5rem;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      font-weight: 600;
+      color: var(--text-medium);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+
+    .tab-btn:hover:not(.active) {
+      color: var(--text-dark);
+    }
+
+    /* Archive Content */
+    .archive-content {
+      display: none;
+    }
+
+    .archive-content.active {
+      display: block;
+    }
+
+    /* Archive List */
+    .archive-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .archive-item {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .archive-item:hover {
+      background: #e3f2fd;
+      transform: translateX(5px);
+    }
+
+    .archive-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .archive-item-title {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .archive-item-date {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .archive-item-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .archive-item-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--text-medium);
+    }
+
+    .archive-item-meta i {
+      font-size: 1rem;
+    }
+
+    .archive-item-summary {
+      color: var(--text-medium);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-medium);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+
+    .empty-state h3 {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .quick-action-btn {
+      flex: 1;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .quick-action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+    }
+
+    .quick-action-btn.secondary {
+      background: linear-gradient(135deg, var(--secondary-blue), var(--secondary-blue-dark));
+    }
+
+    .quick-action-btn.secondary:hover {
+      box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .counselor-dashboard {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hdr {
+        padding: 0 1rem;
+      }
+
+      .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-nav a {
+        white-space: nowrap;
+      }
+
+      .filter-controls {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .quick-actions {
+        flex-direction: column;
+      }
+
+      .archive-tabs {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+
+      .tab-btn {
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hdr">
+      <div class="hdr-logo"><h2>CalmConnect</h2></div>
+      <div class="hdr-btns">
+        <div class="prfl-bell" aria-label="Notifications">
+          <i class="bx bxs-bell"></i>
+        </div>
+        <div class="prfl-name"><h4>Dr. Sarah Martinez</h4></div>
+        <div class="prfl-container">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=40&h=40&fit=crop&crop=face" alt="Profile picture of Dr. Sarah Martinez" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="counselor-dashboard">
+    <aside class="sidebar" aria-label="Counselor navigation">
+      <div class="sidebar-logo"><h3>Counselor Panel</h3></div>
+      <nav class="sidebar-nav">
+        <a href="counselor-panel.html"><i class="bx bxs-dashboard"></i> Dashboard</a>
+        <a href="counselor-schedule.html"><i class="bx bxs-calendar"></i> Schedule</a>
+        <a href="counselor-reports.html"><i class="bx bxs-report"></i> Reports</a>
+        <a href="counselor-archive.html" class="active" aria-current="page"><i class="bx bxs-archive"></i> Archive</a>
+        <a href="counselor-profile.html"><i class="bx bxs-user-circle"></i> Profile</a>
+      </nav>
+    </aside>
+
+    <main class="archive-main">
+      <div class="archive-header">
+        <h2>Session Archive</h2>
+        <p>Review your past counseling sessions and reports</p>
+      </div>
+
+      <div class="filter-controls">
+        <div class="filter-group">
+          <label for="timePeriod">Time Period</label>
+          <select id="timePeriod">
+            <option value="all">All Time</option>
+            <option value="last-month">Last Month</option>
+            <option value="last-3months" selected>Last 3 Months</option>
+            <option value="last-6months">Last 6 Months</option>
+            <option value="last-year">Last Year</option>
+            <option value="custom">Custom Range</option>
+          </select>
+        </div>
+        <div class="filter-group" id="customDateRange" style="display: none;">
+          <label for="dateRange">Date Range</label>
+          <input type="text" id="dateRange" placeholder="Select date range">
+        </div>
+        <div class="filter-group">
+          <label for="sessionType">Session Type</label>
+          <select id="sessionType">
+            <option value="all">All Types</option>
+            <option value="initial">Initial Assessment</option>
+            <option value="followup">Follow-up</option>
+            <option value="group">Group Session</option>
+            <option value="crisis">Crisis Intervention</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="search">Search</label>
+          <input type="text" id="search" placeholder="Search sessions...">
+        </div>
+      </div>
+
+      <div class="archive-tabs">
+        <button class="tab-btn active" data-tab="sessions">Sessions</button>
+        <button class="tab-btn" data-tab="reports">Reports</button>
+        <button class="tab-btn" data-tab="assessments">Assessments</button>
+      </div>
+
+      <div id="sessions-tab" class="archive-content active">
+        <div class="archive-list">
+          <div class="archive-item" tabindex="0">
+            <div class="archive-item-header">
+              <h3 class="archive-item-title">Maria Santos - Follow-up Session</h3>
+              <span class="archive-item-date">May 15, 2023</span>
+            </div>
+            <div class="archive-item-meta">
+              <span><i class="bx bxs-user"></i> STU-2022-0298</span>
+              <span><i class="bx bxs-building"></i> College of Engineering</span>
+              <span><i class="bx bxs-time"></i> 45 minutes</span>
+            </div>
+            <p class="archive-item-summary">
+              Reviewed progress on anxiety management techniques. Student showed improvement in applying breathing exercises during stressful situations.
+            </p>
+          </div>
+
+          <div class="archive-item" tabindex="0">
+            <div class="archive-item-header">
+              <h3 class="archive-item-title">Group Session - Stress Management</h3>
+              <span class="archive-item-date">May 10, 2023</span>
+            </div>
+            <div class="archive-item-meta">
+              <span><i class="bx bxs-group"></i> 8 participants</span>
+              <span><i class="bx bxs-time"></i> 90 minutes</span>
+            </div>
+            <p class="archive-item-summary">
+              Conducted mindfulness techniques workshop. Positive engagement observed from all participants, particularly in the guided meditation exercise.
+            </p>
+          </div>
+
+          <div class="archive-item" tabindex="0">
+            <div class="archive-item-header">
+              <h3 class="archive-item-title">Alex Johnson - Initial Assessment</h3>
+              <span class="archive-item-date">April 28, 2023</span>
+            </div>
+            <div class="archive-item-meta">
+              <span><i class="bx bxs-user"></i> STU-2023-0145</span>
+              <span><i class="bx bxs-building"></i> College of Liberal Arts</span>
+              <span><i class="bx bxs-time"></i> 60 minutes</span>
+            </div>
+            <p class="archive-item-summary">
+              Conducted DASS21 evaluation and intake session. Student presented with moderate anxiety levels related to exam periods.
+            </p>
+          </div>
+
+          <div class="archive-item" tabindex="0">
+            <div class="archive-item-header">
+              <h3 class="archive-item-title">David Kim - Progress Review</h3>
+              <span class="archive-item-date">April 15, 2023</span>
+            </div>
+            <div class="archive-item-meta">
+              <span><i class="bx bxs-user"></i> STU-2021-0087</span>
+              <span><i class="bx bxs-building"></i> College of Business</span>
+              <span><i class="bx bxs-time"></i> 45 minutes</span>
+            </div>
+            <p class="archive-item-summary">
+              Monthly progress evaluation and goal setting. Student has shown improvement in time management skills and reduced procrastination.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="reports-tab" class="archive-content">
+        <div class="archive-list">
+          <div class="archive-item" tabindex="0">
+            <div class="archive-item-header">
+              <h3 class="archive-item-title">DASS21 Assessment Report - Maria Santos</h3>
+              <span class="archive-item-date">May 16, 2023</span>
+            </div>
+            <div class="archive-item-meta">
+              <span><i class="bx bxs-file-pdf"></i> PDF Document</span>
+              <span><i class="bx bxs-user"></i> STU-2022-0298</span>
+            </div>
+            <p class="archive-item-summary">
+              Post-session assessment showing improvement from severe to moderate anxiety levels after 6 weeks of therapy.
+            </p>
+          </div>
+
+          <div class="archive-item" tabindex="0">
+            <div class="archive-item-header">
+              <h3 class="archive-item-title">Group Session Summary - Stress Management</h3>
+              <span class="archive-item-date">May 11, 2023</span>
+            </div>
+            <div class="archive-item-meta">
+              <span><i class="bx bxs-file-doc"></i> Word Document</span>
+              <span><i class="bx bxs-group"></i> 8 participants</span>
+            </div>
+            <p class="archive-item-summary">
+              Detailed observations and feedback from the mindfulness techniques workshop conducted on May 10th.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="assessments-tab" class="archive-content">
+        <div class="archive-list">
+          <div class="archive-item" tabindex="0">
+            <div class="archive-item-header">
+              <h3 class="archive-item-title">DASS21 Results - Alex Johnson</h3>
+              <span class="archive-item-date">April 29, 2023</span>
+            </div>
+            <div class="archive-item-meta">
+              <span><i class="bx bxs-spreadsheet"></i> Excel File</span>
+              <span><i class="bx bxs-user"></i> STU-2023-0145</span>
+            </div>
+            <p class="archive-item-summary">
+              Initial assessment scores: Depression - 12, Anxiety - 16, Stress - 14 (Moderate range for anxiety and stress).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <button class="quick-action-btn" id="exportDataBtn">
+          <i class="bx bxs-download"></i>
+          Export Data
+        </button>
+        <button class="quick-action-btn secondary" id="printArchiveBtn">
+          <i class="bx bxs-printer"></i>
+          Print Archive
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Tab functionality
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.archive-content');
+      
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          // Remove active class from all buttons and contents
+          tabBtns.forEach(b => b.classList.remove('active'));
+          tabContents.forEach(c => c.classList.remove('active'));
+          
+          // Add active class to clicked button and corresponding content
+          this.classList.add('active');
+          const tabId = this.getAttribute('data-tab');
+          document.getElementById(`${tabId}-tab`).classList.add('active');
+        });
+      });
+
+      // Time period filter
+      const timePeriodSelect = document.getElementById('timePeriod');
+      const customDateRange = document.getElementById('customDateRange');
+      
+      timePeriodSelect.addEventListener('change', function() {
+        if (this.value === 'custom') {
+          customDateRange.style.display = 'block';
+        } else {
+          customDateRange.style.display = 'none';
+        }
+        // In a real implementation, this would filter the archive items
+        console.log('Filtering by:', this.value);
+      });
+
+      // Archive item click functionality
+      const archiveItems = document.querySelectorAll('.archive-item');
+      archiveItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const title = this.querySelector('.archive-item-title').textContent;
+          alert(`Opening details for: ${title}`);
+        });
+        
+        // Keyboard accessibility
+        item.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const title = this.querySelector('.archive-item-title').textContent;
+            alert(`Opening details for: ${title}`);
+          }
+        });
+      });
+
+      // Quick action buttons
+      document.getElementById('exportDataBtn').addEventListener('click', function() {
+        alert('Export functionality would be implemented here');
+      });
+
+      document.getElementById('printArchiveBtn').addEventListener('click', function() {
+        window.print();
+      });
+
+      // Notification bell functionality
+      document.querySelector('.prfl-bell').addEventListener('click', function() {
+        alert('You have no new notifications');
+      });
+    });
+  </script>
+</body>
+</html>

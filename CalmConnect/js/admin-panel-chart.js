@@ -1,25 +1,34 @@
-const ctx = document.getElementById('overviewChart').getContext('2d');
+   const ctx = document.getElementById('overviewChart').getContext('2d');
     new Chart(ctx, {
-      type: 'pie',
+      type: 'doughnut',
       data: {
         labels: ['Normal', 'Mild', 'Moderate', 'Severe', 'Extremely Severe'],
         datasets: [{
-          label: 'DASS21 Results',
-          data: [53, 53, 74, 105, 1750],
+          data: [45, 23, 18, 10, 4],
           backgroundColor: [
             '#2ecc71',
+            '#3498db',
             '#f1c40f',
             '#e67e22',
-            '#e74c3c',
-            '#c0392b'
+            '#e74c3c'
           ],
-          borderWidth: 1
+          borderWidth: 0,
         }]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'bottom' }
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              usePointStyle: true,
+              font: {
+                size: 12
+              }
+            }
+          }
         }
       }
     });

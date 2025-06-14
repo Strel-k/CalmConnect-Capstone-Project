@@ -5,30 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personnel | CalmConnect</title>
 
-  <link rel="stylesheet" href="css/index.css" />
-  <link rel="stylesheet" href="css/sidebar.css" />
-  <link rel="stylesheet" href="css/profile-dropdown.css" />
-  <link rel="stylesheet" href="css/admin-personnel.css" />
+  <!-- External Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
+  <link rel="stylesheet" href="css/admin-panel.css">
+  <link rel="stylesheet" href="css/admin-panel-enhanced.css">
+  <link rel="stylesheet" href="css/dropdown.css">
   <link rel="icon" type="image/x-icon" href="img/favicon.png" />
+  <link rel="stylesheet" href="css/admin-personnel.css">
+  <link rel="stylesheet" href="css/profile-dropdown.css">
+  
+  <style>
+   
+  </style>
 </head>
 <body>
   <header>
     <div class="hdr">
-      <div class="hdr-logo"><a href="#"><h2>CalmConnect</h2></a></div>
+      <div class="hdr-logo">
+        <h2>CalmConnect</h2>
+      </div>
       <div class="hdr-btns">
-        <div class="prfl-bell dropdown">
-          <i class="bx bxs-bell" id="bell-icon"></i>
-          <div class="dropdown-menu" id="bell-dropdown"><p>No new notifications</p></div>
+        <div class="prfl-bell">
+          <i class="bx bxs-bell"></i>
         </div>
-        <div class="prfl-name"><h4>Username</h4></div>
-        <div class="prfl-container dropdown">
-          <img src="img/default.jpg" alt="Profile" id="profile-img" />
-          <div class="dropdown-menu" id="profile-dropdown">
-            <a href="#">Settings</a>
-            <a href="login.html">Log out</a>
-            <a href="user-profile.html">Profile</a>
-          </div>
+        <div class="prfl-name">
+          <h4>Admin User</h4>
+        </div>
+        <div class="prfl-container">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Profile" />
         </div>
       </div>
     </div>
@@ -39,70 +43,277 @@
       <div class="sidebar-logo"><h3>Admin Panel</h3></div>
       <nav class="sidebar-nav">
         <a href="admin-panel.html"><i class="bx bxs-home"></i> Dashboard</a>
-        <a href="admin-data.html"><i class="bx bxs-data"></i> Data</a>
-        <a href="admin-appointments.html"><i class="bx bxs-calendar-week"></i> Appointments</a>
-        <a href="admin-archive.html"><i class="bx bxs-archive"></i> Archives</a>
+        <a href="admin-data.html"><i class='bx bxs-data'></i> Data</a>
+        <a href="admin-appointments.html"><i class='bx bxs-calendar-week'></i> Appointments</a>
+        <a href="admin-archive.html"><i class='bx bxs-archive'></i> Archives</a>
         <a href="admin-personnel.html" class="active"><i class="bx bxs-user-badge"></i> Personnel</a>
       </nav>
     </aside>
 
     <main class="personnel-main">
       <div class="personnel-header">
-        <h2>Active Counselors</h2>
-        <button onclick="openAddModal()" class="add-btn"><i class="bx bx-plus"></i> Add Counselor</button>
+        <h2>Counselor Management</h2>
+        <button onclick="openAddModal()" class="add-btn">
+          <i class="bx bx-plus"></i> Add Counselor
+        </button>
       </div>
 
-      <table class="personnel-table">
-      <thead>
-  <tr>
-    <th>Photo</th>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Unit</th>
-    <th>Rank</th>
-    <th>Action</th>
-  </tr>
-</thead>
-<tbody id="counselor-list">
-  <tr>
-    <td><img src="img/default.jpg" class="counselor-photo" alt="Ms. Rivera"></td>
-    <td>Ms. Rivera</td>
-    <td>mrivera@university.edu</td>
-    <td>Guidance and Counseling</td>
-    <td>Assistant Professor I</td>
-    <td>
-<button onclick="openEditModal(this)">Edit</button>
-      <button onclick="archiveCounselor('Ms. Rivera')">Archive</button>
-    </td>
-  </tr>
-</tbody>
-      </table>
+      <div class="personnel-table-container">
+        <table class="personnel-table">
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Department</th>
+              <th>Rank</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="counselor-list">
+            <tr>
+              <td><img src="https://randomuser.me/api/portraits/women/44.jpg" class="counselor-photo" alt="Ms. Rivera" /></td>
+              <td>Ms. Rivera</td>
+              <td>mrivera@university.edu</td>
+              <td>Guidance and Counseling</td>
+              <td>Assistant Professor I</td>
+              <td>
+                <button onclick="openEditModal(this)">Edit</button>
+                <button onclick="archiveCounselor('Ms. Rivera')">Archive</button>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="https://randomuser.me/api/portraits/men/32.jpg" class="counselor-photo" alt="Dr. Santos" /></td>
+              <td>Dr. Santos</td>
+              <td>dsantos@university.edu</td>
+              <td>Psychology Department</td>
+              <td>Associate Professor III</td>
+              <td>
+                <button onclick="openEditModal(this)">Edit</button>
+                <button onclick="archiveCounselor('Dr. Santos')">Archive</button>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="https://randomuser.me/api/portraits/women/68.jpg" class="counselor-photo" alt="Ms. Garcia" /></td>
+              <td>Ms. Garcia</td>
+              <td>mgarcia@university.edu</td>
+              <td>Student Affairs</td>
+              <td>Assistant Professor II</td>
+              <td>
+                <button onclick="openEditModal(this)">Edit</button>
+                <button onclick="archiveCounselor('Ms. Garcia')">Archive</button>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="https://randomuser.me/api/portraits/men/75.jpg" class="counselor-photo" alt="Dr. Reyes" /></td>
+              <td>Dr. Reyes</td>
+              <td>dreyes@university.edu</td>
+              <td>Guidance and Counseling</td>
+              <td>Professor IV</td>
+              <td>
+                <button onclick="openEditModal(this)">Edit</button>
+                <button onclick="archiveCounselor('Dr. Reyes')">Archive</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </main>
   </div>
+
+  <!-- Add/Edit Personnel Modal -->
   <div class="modal" id="personnel-modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">&times;</span>
       <h3 id="modal-title">Add Counselor</h3>
-      <form id="personnel-form">
-  <img id="photoPreview" src="img/default.jpg" class="preview-img" alt="Preview" />
-  <input type="file" id="photoInput" accept="image/*" onchange="previewPhoto()" />
+      <form id="personnel-form" onsubmit="handleFormSubmit(event)">
+        <img id="photoPreview" src="https://randomuser.me/api/portraits/lego/6.jpg" class="preview-img" alt="Preview" />
+        <input type="file" id="photoInput" accept="image/*" onchange="previewPhoto()" />
 
-  <input type="text" id="nameInput" placeholder="Full Name" required />
-  <input type="email" id="emailInput" placeholder="Email" required />
-  <input type="text" id="unitInput" placeholder="Unit" required />
-  <input type="text" id="rankInput" placeholder="Rank" required />
+        <input type="text" id="nameInput" placeholder="Full Name" required />
+        <input type="email" id="emailInput" placeholder="Email Address" required />
+        <input type="text" id="unitInput" placeholder="Department/Unit" required />
+        <input type="text" id="rankInput" placeholder="Academic Rank" required />
 
-  <div class="modal-actions">
-    <button type="submit" class="save-btn">Save</button>
-    <button type="button" onclick="closeModal()">Cancel</button>
-  </div>
-</form>
-
+        <div class="modal-actions">
+          <button type="submit" class="save-btn">Save</button>
+          <button type="button" onclick="closeModal()">Cancel</button>
+        </div>
+      </form>
     </div>
   </div>
 
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmation-modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeConfirmationModal()">&times;</span>
+      <h3>Confirm Action</h3>
+      <p id="confirmation-message">Are you sure you want to archive this counselor?</p>
+      <div class="modal-actions">
+        <button id="confirm-btn" class="save-btn">Confirm</button>
+        <button type="button" onclick="closeConfirmationModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global variables
+    let currentEditRow = null;
+    let currentAction = null;
+    let counselorToArchive = null;
+
+    // Modal Functions
+    function openAddModal() {
+      document.getElementById('modal-title').textContent = 'Add Counselor';
+      document.getElementById('personnel-modal').classList.add('show');
+      resetForm();
+      currentEditRow = null;
+    }
+
+    function openEditModal(button) {
+      const row = button.closest('tr');
+      currentEditRow = row;
+      
+      const cells = row.querySelectorAll('td');
+      const img = cells[0].querySelector('img');
+      const name = cells[1].textContent;
+      const email = cells[2].textContent;
+      const unit = cells[3].textContent;
+      const rank = cells[4].textContent;
+
+      document.getElementById('modal-title').textContent = 'Edit Counselor';
+      document.getElementById('photoPreview').src = img.src;
+      document.getElementById('nameInput').value = name;
+      document.getElementById('emailInput').value = email;
+      document.getElementById('unitInput').value = unit;
+      document.getElementById('rankInput').value = rank;
+
+      document.getElementById('personnel-modal').classList.add('show');
+    }
+
+    function closeModal() {
+      document.getElementById('personnel-modal').classList.remove('show');
+      resetForm();
+    }
+
+    function resetForm() {
+      document.getElementById('personnel-form').reset();
+      document.getElementById('photoPreview').src = 'https://randomuser.me/api/portraits/lego/6.jpg';
+      currentEditRow = null;
+    }
+
+    // Archive Functions
+    function archiveCounselor(name) {
+      counselorToArchive = name;
+      document.getElementById('confirmation-message').textContent = 
+        `Are you sure you want to archive ${name}?`;
+      document.getElementById('confirmation-modal').classList.add('show');
+    }
+
+    function closeConfirmationModal() {
+      document.getElementById('confirmation-modal').classList.remove('show');
+      counselorToArchive = null;
+    }
+
+    function confirmArchive() {
+      if (counselorToArchive) {
+        // Find and remove the row
+        const rows = document.querySelectorAll('#counselor-list tr');
+        rows.forEach(row => {
+          const nameCell = row.querySelector('td:nth-child(2)');
+          if (nameCell && nameCell.textContent === counselorToArchive) {
+            row.remove();
+          }
+        });
+        
+        // Show success message
+        alert(`${counselorToArchive} has been archived successfully.`);
+        
+        closeConfirmationModal();
+      }
+    }
+
+    // Form Functions
+    function previewPhoto() {
+      const file = document.getElementById('photoInput').files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('photoPreview').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      const formData = {
+        name: document.getElementById('nameInput').value,
+        email: document.getElementById('emailInput').value,
+        unit: document.getElementById('unitInput').value,
+        rank: document.getElementById('rankInput').value,
+        photo: document.getElementById('photoPreview').src
+      };
+
+      if (currentEditRow) {
+        // Update existing row
+        updateCounselorRow(currentEditRow, formData);
+        alert('Counselor updated successfully!');
+      } else {
+        // Add new row
+        addNewCounselorRow(formData);
+        alert('Counselor added successfully!');
+      }
+
+      closeModal();
+    }
+
+    function updateCounselorRow(row, data) {
+      const cells = row.querySelectorAll('td');
+      cells[0].querySelector('img').src = data.photo;
+      cells[0].querySelector('img').alt = data.name;
+      cells[1].textContent = data.name;
+      cells[2].textContent = data.email;
+      cells[3].textContent = data.unit;
+      cells[4].textContent = data.rank;
+    }
+
+    function addNewCounselorRow(data) {
+      const tbody = document.getElementById('counselor-list');
+      const newRow = document.createElement('tr');
+      
+      newRow.innerHTML = `
+        <td><img src="${data.photo}" class="counselor-photo" alt="${data.name}" /></td>
+        <td>${data.name}</td>
+        <td>${data.email}</td>
+        <td>${data.unit}</td>
+        <td>${data.rank}</td>
+        <td>
+          <button onclick="openEditModal(this)">Edit</button>
+          <button onclick="archiveCounselor('${data.name}')">Archive</button>
+        </td>
+      `;
+      
+      tbody.appendChild(newRow);
+    }
+
+    // Initialize confirm button
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('confirm-btn').addEventListener('click', confirmArchive);
+      
+      // Close modals when clicking outside
+      window.addEventListener('click', function(event) {
+        if (event.target === document.getElementById('personnel-modal')) {
+          closeModal();
+        }
+        if (event.target === document.getElementById('confirmation-modal')) {
+          closeConfirmationModal();
+        }
+      });
+    });
+  </script>
   <script src="js/bell.js"></script>
   <script src="js/dropdown.js"></script>
-  <script src="js/admin-personnel.js"></script>
 </body>
 </html>
